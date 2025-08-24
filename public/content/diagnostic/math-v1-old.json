@@ -262,27 +262,88 @@
     "prompt": "Find the Taylor series for e^x centered at x=0 up to the x³ term",
     "choices": ["1 + x + x²/2 + x³/6", "1 + x + x² + x³", "x + x²/2 + x³/6", "1 + x + x²/2"],
     "answer": "1 + x + x²/2 + x³/6"
+  }
+]
+    "type": "mcq", 
+    "prompt": "In the number 47, what digit is in the tens place?",
+    "choices": ["4", "7", "10", "40"],
+    "answer": "4"
   },
   {
-    "id": "math-multvar-1",
+    "id": "math-sub-1",
     "subject": "math",
-    "skill": "multivariable-calculus",
-    "gradeHint": "College",
-    "difficulty": 3,
+    "skill": "subtraction",
+    "gradeHint": "2",
+    "difficulty": 0.5,
     "type": "mcq",
-    "prompt": "Find the double integral: ∫∫ xy dA over the region R = {(x,y): 0≤x≤1, 0≤y≤2}",
-    "choices": ["1", "2", "1/2", "4"],
-    "answer": "1"
+    "prompt": "What is 15 - 8?",
+    "choices": ["6", "7", "8", "9"],
+    "answer": "7"
   },
   {
-    "id": "math-complex-1",
+    "id": "math-mult-1",
     "subject": "math",
-    "skill": "complex-analysis",
-    "gradeHint": "College",
-    "difficulty": 3,
+    "skill": "multiplication",
+    "gradeHint": "3",
+    "difficulty": 1,
     "type": "mcq",
-    "prompt": "What is the modulus |z| of the complex number z = 3 + 4i?",
-    "choices": ["5", "7", "25", "12"],
-    "answer": "5"
+    "prompt": "What is 6 × 4?",
+    "choices": ["20", "22", "24", "26"],
+    "answer": "24"
+  },
+  {
+    "id": "math-frac-1", 
+    "subject": "math",
+    "skill": "fractions",
+    "gradeHint": "3-4",
+    "difficulty": 1.5,
+    "type": "mcq",
+    "prompt": "Which fraction is equivalent to 1/2?",
+    "choices": ["2/3", "2/4", "3/4", "1/4"],
+    "answer": "2/4"
+  },
+  {
+    "id": "math-dec-1",
+    "subject": "math", 
+    "skill": "decimals",
+    "gradeHint": "4-5",
+    "difficulty": 2,
+    "type": "mcq",
+    "prompt": "What is 0.5 + 0.3?",
+    "choices": ["0.7", "0.8", "0.9", "1.0"],
+    "answer": "0.8"
+  },
+  {
+    "id": "math-prob-1",
+    "subject": "math",
+    "skill": "problem-solving", 
+    "gradeHint": "4-5",
+    "difficulty": 1.8,
+    "type": "mcq",
+    "prompt": "A box contains 24 crayons arranged in 4 equal rows. How many crayons are in each row?",
+    "choices": ["4", "5", "6", "8"],
+    "answer": "6"
+  },
+  {
+    "id": "math-geo-1",
+    "subject": "math",
+    "skill": "geometry",
+    "gradeHint": "3-4", 
+    "difficulty": 1.2,
+    "type": "mcq",
+    "prompt": "How many sides does a triangle have?",
+    "choices": ["2", "3", "4", "5"],
+    "answer": "3"
+  },
+  {
+    "id": "math-time-1",
+    "subject": "math",
+    "skill": "time",
+    "gradeHint": "2-3",
+    "difficulty": 0.3,
+    "type": "mcq",
+    "prompt": "How many minutes are in one hour?",
+    "choices": ["30", "45", "60", "90"],
+    "answer": "60"
   }
 ]

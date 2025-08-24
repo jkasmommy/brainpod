@@ -1,0 +1,133 @@
+[
+  {
+    "id": "read-letter-1",
+    "subject": "reading",
+    "skill": "letter-recognition",
+    "gradeHint": "K",
+    "difficulty": -2,
+    "type": "mcq",
+    "prompt": "Which letter makes the /b/ sound?",
+    "choices": ["d", "b", "p", "q"],
+    "answer": "b"
+  },
+  {
+    "id": "read-phoneme-1",
+    "subject": "reading", 
+    "skill": "phonics",
+    "gradeHint": "K-1",
+    "difficulty": -1.5,
+    "type": "phoneme",
+    "prompt": "What sound does the letter 'm' make?",
+    "answer": "/m/"
+  },
+  {
+    "id": "read-sight-1",
+    "subject": "reading",
+    "skill": "sight-words",
+    "gradeHint": "K-1", 
+    "difficulty": -1,
+    "type": "mcq",
+    "prompt": "Which word says 'the'?",
+    "choices": ["teh", "the", "hte", "het"],
+    "answer": "the"
+  },
+  {
+    "id": "read-blend-1",
+    "subject": "reading",
+    "skill": "blending",
+    "gradeHint": "1",
+    "difficulty": -0.5,
+    "type": "mcq",
+    "prompt": "What word do these sounds make: /c/ /a/ /t/?",
+    "choices": ["cap", "cat", "cut", "cot"],
+    "answer": "cat"
+  },
+  {
+    "id": "read-comp-1",
+    "subject": "reading",
+    "skill": "comprehension",
+    "gradeHint": "1-2",
+    "difficulty": 0,
+    "type": "mcq",
+    "prompt": "The dog ran to the park. Where did the dog go?",
+    "choices": ["home", "store", "park", "school"], 
+    "answer": "park"
+  },
+  {
+    "id": "read-vocab-1",
+    "subject": "reading",
+    "skill": "vocabulary",
+    "gradeHint": "2",
+    "difficulty": 0.5,
+    "type": "mcq",
+    "prompt": "What does the word 'gigantic' mean?",
+    "choices": ["very small", "very big", "very fast", "very slow"],
+    "answer": "very big"
+  },
+  {
+    "id": "read-infer-1",
+    "subject": "reading",
+    "skill": "inference",
+    "gradeHint": "2-3",
+    "difficulty": 1,
+    "type": "mcq", 
+    "prompt": "Maya put on her coat and grabbed an umbrella before going outside. What is the weather probably like?",
+    "choices": ["sunny", "rainy", "snowy", "windy"],
+    "answer": "rainy"
+  },
+  {
+    "id": "read-main-1",
+    "subject": "reading",
+    "skill": "main-idea",
+    "gradeHint": "3",
+    "difficulty": 1.5,
+    "type": "mcq",
+    "prompt": "Bees collect nectar from flowers. They use the nectar to make honey. Bees help flowers by spreading pollen. What is this passage mainly about?",
+    "choices": ["flowers", "nectar", "how bees help plants", "making honey"],
+    "answer": "how bees help plants"
+  },
+  {
+    "id": "read-context-1",
+    "subject": "reading",
+    "skill": "context-clues",
+    "gradeHint": "3-4",
+    "difficulty": 1.8,
+    "type": "mcq",
+    "prompt": "The ancient castle was very old and crumbling. What does 'ancient' mean?", 
+    "choices": ["new", "very old", "beautiful", "scary"],
+    "answer": "very old"
+  },
+  {
+    "id": "read-seq-1",
+    "subject": "reading",
+    "skill": "sequencing",
+    "gradeHint": "2-3",
+    "difficulty": 1.2,
+    "type": "mcq",
+    "prompt": "First, mix the ingredients. Next, pour into a pan. Then, bake for 30 minutes. What do you do after mixing?",
+    "choices": ["bake", "pour into pan", "eat", "cool down"],
+    "answer": "pour into pan"
+  },
+  {
+    "id": "read-cause-1",
+    "subject": "reading",
+    "skill": "cause-effect",
+    "gradeHint": "3-4",
+    "difficulty": 1.3,
+    "type": "mcq",
+    "prompt": "Because it was raining, the picnic was moved inside. Why was the picnic moved?",
+    "choices": ["too hot", "raining", "too cold", "too windy"],
+    "answer": "raining"
+  },
+  {
+    "id": "read-genre-1", 
+    "subject": "reading",
+    "skill": "genre",
+    "gradeHint": "4-5",
+    "difficulty": 2,
+    "type": "mcq",
+    "prompt": "A story about a princess who can talk to animals is most likely which type of story?",
+    "choices": ["biography", "fantasy", "mystery", "historical fiction"],
+    "answer": "fantasy"
+  }
+]
