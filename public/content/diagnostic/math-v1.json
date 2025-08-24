@@ -1,0 +1,133 @@
+[
+  {
+    "id": "math-count-1",
+    "subject": "math",
+    "skill": "counting",
+    "gradeHint": "K",
+    "difficulty": -2,
+    "type": "count",
+    "prompt": "How many stars do you see?",
+    "answer": "3"
+  },
+  {
+    "id": "math-count-2", 
+    "subject": "math",
+    "skill": "counting",
+    "gradeHint": "K-1",
+    "difficulty": -1.5,
+    "type": "mcq",
+    "prompt": "Count the apples. How many are there?",
+    "choices": ["4", "5", "6", "7"],
+    "answer": "5"
+  },
+  {
+    "id": "math-add-1",
+    "subject": "math", 
+    "skill": "addition",
+    "gradeHint": "1",
+    "difficulty": -1,
+    "type": "mcq",
+    "prompt": "What is 2 + 3?",
+    "choices": ["4", "5", "6", "7"],
+    "answer": "5"
+  },
+  {
+    "id": "math-add-2",
+    "subject": "math",
+    "skill": "addition", 
+    "gradeHint": "1-2",
+    "difficulty": -0.5,
+    "type": "mcq",
+    "prompt": "Sarah has 4 stickers. Her friend gives her 3 more. How many stickers does Sarah have now?",
+    "choices": ["6", "7", "8", "9"],
+    "answer": "7"
+  },
+  {
+    "id": "math-place-1",
+    "subject": "math",
+    "skill": "place-value",
+    "gradeHint": "2",
+    "difficulty": 0,
+    "type": "mcq", 
+    "prompt": "In the number 47, what digit is in the tens place?",
+    "choices": ["4", "7", "10", "40"],
+    "answer": "4"
+  },
+  {
+    "id": "math-sub-1",
+    "subject": "math",
+    "skill": "subtraction",
+    "gradeHint": "2",
+    "difficulty": 0.5,
+    "type": "mcq",
+    "prompt": "What is 15 - 8?",
+    "choices": ["6", "7", "8", "9"],
+    "answer": "7"
+  },
+  {
+    "id": "math-mult-1",
+    "subject": "math",
+    "skill": "multiplication",
+    "gradeHint": "3",
+    "difficulty": 1,
+    "type": "mcq",
+    "prompt": "What is 6 × 4?",
+    "choices": ["20", "22", "24", "26"],
+    "answer": "24"
+  },
+  {
+    "id": "math-frac-1", 
+    "subject": "math",
+    "skill": "fractions",
+    "gradeHint": "3-4",
+    "difficulty": 1.5,
+    "type": "mcq",
+    "prompt": "Which fraction is equivalent to 1/2?",
+    "choices": ["2/3", "2/4", "3/4", "1/4"],
+    "answer": "2/4"
+  },
+  {
+    "id": "math-dec-1",
+    "subject": "math", 
+    "skill": "decimals",
+    "gradeHint": "4-5",
+    "difficulty": 2,
+    "type": "mcq",
+    "prompt": "What is 0.5 + 0.3?",
+    "choices": ["0.7", "0.8", "0.9", "1.0"],
+    "answer": "0.8"
+  },
+  {
+    "id": "math-prob-1",
+    "subject": "math",
+    "skill": "problem-solving", 
+    "gradeHint": "4-5",
+    "difficulty": 1.8,
+    "type": "mcq",
+    "prompt": "A box contains 24 crayons arranged in 4 equal rows. How many crayons are in each row?",
+    "choices": ["4", "5", "6", "8"],
+    "answer": "6"
+  },
+  {
+    "id": "math-geo-1",
+    "subject": "math",
+    "skill": "geometry",
+    "gradeHint": "3-4", 
+    "difficulty": 1.2,
+    "type": "mcq",
+    "prompt": "How many sides does a triangle have?",
+    "choices": ["2", "3", "4", "5"],
+    "answer": "3"
+  },
+  {
+    "id": "math-time-1",
+    "subject": "math",
+    "skill": "time",
+    "gradeHint": "2-3",
+    "difficulty": 0.3,
+    "type": "mcq",
+    "prompt": "How many minutes are in one hour?",
+    "choices": ["30", "45", "60", "90"],
+    "answer": "60"
+  }
+]
