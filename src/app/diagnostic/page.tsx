@@ -58,7 +58,7 @@ export default function DiagnosticHub() {
           {/* Mission Statement */}
           <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-6 mb-12 backdrop-blur-sm">
             <p className="text-center text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">
-              "BrainPod blends standards-aligned curriculum with mindful breaks to adapt to every learner—because no two minds are alike."
+              &ldquo;BrainPod blends standards-aligned curriculum with mindful breaks to adapt to every learner—because no two minds are alike.&rdquo;
             </p>
             <p className="text-center text-sm text-gray-600 dark:text-gray-400">
               Built with privacy-first design and accessibility at the core.

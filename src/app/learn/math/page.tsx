@@ -16,16 +16,16 @@ const mathUnits = [
 
 export default function MathLearning() {
   // Check for saved placement recommendation
-  const getRecommendedUnit = () => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('bp_place_math');
-      if (saved) {
-        const placement = JSON.parse(saved);
-        return placement.placement?.recommendedUnit;
-      }
-    }
-    return null;
-  };
+  // const getRecommendedUnit = () => {
+  //   if (typeof window !== 'undefined') {
+  //     const saved = localStorage.getItem('bp_place_math');
+  //     if (saved) {
+  //       const placement = JSON.parse(saved);
+  //       return placement.placement?.recommendedUnit;
+  //     }
+  //   }
+  //   return null;
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">

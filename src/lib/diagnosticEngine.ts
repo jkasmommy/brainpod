@@ -24,14 +24,15 @@ export async function loadDiagBank(subject: Subject): Promise<DiagItem[]> {
       throw new Error(`Invalid ${subject} bank: expected array`);
     }
     
-    return items.filter((item: any): item is DiagItem => {
+    return items.filter((item: unknown): item is DiagItem => {
+      const itemObj = item as Record<string, unknown>;
       return (
-        typeof item.id === 'string' &&
-        item.subject === subject &&
-        typeof item.skill === 'string' &&
-        typeof item.difficulty === 'number' &&
-        typeof item.prompt === 'string' &&
-        typeof item.answer === 'string'
+        typeof itemObj.id === 'string' &&
+        itemObj.subject === subject &&
+        typeof itemObj.skill === 'string' &&
+        typeof itemObj.difficulty === 'number' &&
+        typeof itemObj.prompt === 'string' &&
+        typeof itemObj.answer === 'string'
       );
     });
   } catch (error) {

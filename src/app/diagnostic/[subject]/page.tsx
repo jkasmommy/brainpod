@@ -251,7 +251,7 @@ export default function DiagnosticRunner() {
                 {subject.charAt(0).toUpperCase() + subject.slice(1).replace('-', ' ')} Diagnostic
               </h1>
               <p className="text-gray-600 dark:text-gray-300">
-                Let's find your perfect starting point!
+                Let&apos;s find your perfect starting point!
               </p>
             </div>
 

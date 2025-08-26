@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Book, ArrowLeft, Star, Clock, Target } from 'lucide-react';
+import { Book, ArrowLeft, Clock, Target } from 'lucide-react';
 
 const readingUnits = [
   { id: 'phonics', name: 'Phonics & Letter Sounds', level: 'K-1', description: 'Learn letter sounds and basic phonetic patterns' },

@@ -157,11 +157,11 @@ export default function DiagnosticResults() {
             </h1>
             
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-2">
-              You've completed your {config.name} diagnostic
+              You&apos;ve completed your {config.name} diagnostic
             </p>
             
             <p className="text-gray-600 dark:text-gray-400">
-              Here's what we discovered about your learning level
+              Here&apos;s what we discovered about your learning level
             </p>
           </div>
 

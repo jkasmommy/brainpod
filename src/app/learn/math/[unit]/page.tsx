@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calculator, ArrowLeft, Star, Clock, Target, Play, CheckCircle } from 'lucide-react';
+import { Calculator, ArrowLeft, Clock, Target, Play, CheckCircle } from 'lucide-react';
 
 interface Props {
   params: { unit: string };
@@ -63,7 +63,7 @@ export default function MathUnit({ params }: Props) {
               Unit Not Found
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              The math unit you're looking for doesn't exist yet.
+              The math unit you&apos;re looking for doesn&apos;t exist yet.
             </p>
             <Link
               href="/learn/math"
