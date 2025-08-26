@@ -18,7 +18,7 @@ export default function Home() {
             Adaptive learning for every mind
           </h2>
 
-          {/* Subheading */}
+          {/* Subheading - Updated for diagnostic system */}
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
             Blending standards-aligned curriculum with mindful breaks to create 
             personalized learning experiences that adapt to how your brain works best.
