@@ -108,6 +108,7 @@ export default function MindfulBreak({
         {/* Breathing Circle */}
         <div className="flex justify-center mb-6">
           <BreathingCircle 
+            key={`breathing-${duration}-${isOpen}`}
             duration={duration}
             onComplete={onComplete}
             onSkip={onSkip}

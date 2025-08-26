@@ -18,19 +18,31 @@ export default function BreathingCircle({
   const [phase, setPhase] = useState<'inhale' | 'hold' | 'exhale'>('inhale');
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isActive, setIsActive] = useState(true);
+  const [hasCompleted, setHasCompleted] = useState(false);
+
+  // Reset timeLeft if duration changes (component remount)
+  useEffect(() => {
+    setTimeLeft(duration);
+    setIsActive(true);
+    setHasCompleted(false);
+  }, [duration]);
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || hasCompleted) return;
 
     const interval = setInterval(() => {
       setTimeLeft(prev => {
+        console.log('Timer tick:', prev); // Debug log
         const newTime = prev - 1;
         
         // If time is up, complete the exercise
         if (newTime <= 0) {
+          console.log('Timer completed, calling onComplete'); // Debug log
           setIsActive(false);
+          setHasCompleted(true);
+          clearInterval(interval);
           if (onComplete) {
-            onComplete();
+            setTimeout(() => onComplete(), 100); // Small delay to ensure state updates
           }
           return 0;
         }
@@ -50,7 +62,7 @@ export default function BreathingCircle({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isActive, onComplete]);
+  }, [isActive, hasCompleted, onComplete]);
 
   const getPhaseText = () => {
     switch (phase) {
@@ -122,7 +134,11 @@ export default function BreathingCircle({
       {/* Skip Button */}
       {onSkip && (
         <button
-          onClick={onSkip}
+          onClick={() => {
+            setIsActive(false);
+            setHasCompleted(true);
+            onSkip();
+          }}
           className="mt-4 px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md"
         >
           Skip mindful break
