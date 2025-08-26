@@ -1,0 +1,75 @@
+{
+  "math": {
+    "K": {
+      "counting": {
+        "title": "Counting",
+        "lessons": [
+          { "id": "math-k-counting-1", "title": "Counting 1–5", "skills": ["count_1_5"], "minutes": 8, "difficulty": -1, "standards": ["K.CC.A.1","K.CC.B.4"] },
+          { "id": "math-k-counting-2", "title": "Counting 6–10", "skills": ["count_6_10"], "minutes": 10, "difficulty": -0.5, "standards": ["K.CC.A.1","K.CC.B.4"] },
+          { "id": "math-k-add-1", "title": "Add within 5 (pictures)", "skills": ["add_within_5"], "minutes": 10, "difficulty": -0.2, "standards": ["K.OA.A.1"] }
+        ]
+      }
+    },
+    "1": {
+      "place-value": {
+        "title": "Place Value (Tens & Ones)",
+        "lessons": [
+          { "id": "math-1-pv-1", "title": "Tens & Ones", "skills": ["pv_tens_ones"], "minutes": 12, "difficulty": 0.2, "standards": ["1.NBT.B.2"] },
+          { "id": "math-1-compare-1", "title": "Compare 2-digit numbers", "skills": ["compare_2digit"], "minutes": 12, "difficulty": 0.4, "standards": ["1.NBT.B.3"] }
+        ]
+      },
+      "add-sub": {
+        "title": "Addition & Subtraction within 20",
+        "lessons": [
+          { "id": "math-1-add-20-1", "title": "Make 10 to add", "skills": ["add_make_10"], "minutes": 12, "difficulty": 0.5, "standards": ["1.OA.C.6"] }
+        ]
+      }
+    }
+  },
+  "reading": {
+    "K": {
+      "phonics": {
+        "title": "Phonemic Awareness",
+        "lessons": [
+          { "id": "reading-k-phonics-1", "title": "Beginning sounds /m/ /s/ /t/", "skills": ["phoneme_initial"], "minutes": 8, "difficulty": -0.7, "standards": ["RF.K.2"] },
+          { "id": "reading-k-phonics-2", "title": "CVC blending", "skills": ["cvc_blend"], "minutes": 10, "difficulty": -0.2, "standards": ["RF.K.2","RF.K.3"] },
+          { "id": "reading-k-sight-1", "title": "Sight words: a, I, to", "skills": ["sight_a_to"], "minutes": 8, "difficulty": -0.3, "standards": ["RF.K.3"] }
+        ]
+      }
+    }
+  },
+  "science": {
+    "3": {
+      "life-cycles": {
+        "title": "Life Cycles",
+        "lessons": [
+          { "id": "science-3-life-1", "title": "Frog life cycle", "skills": ["life_cycle_frog"], "minutes": 12, "difficulty": 0.0, "standards": ["3-LS1-1"] },
+          { "id": "science-3-life-2", "title": "Butterfly life cycle", "skills": ["life_cycle_butterfly"], "minutes": 12, "difficulty": 0.2, "standards": ["3-LS1-1"] }
+        ]
+      },
+      "matter": {
+        "title": "Matter",
+        "lessons": [
+          { "id": "science-3-matter-1", "title": "Solids, liquids, gases", "skills": ["states_of_matter"], "minutes": 10, "difficulty": 0.3, "standards": ["3-PS1-3"] }
+        ]
+      }
+    }
+  },
+  "social-studies": {
+    "5": {
+      "us-regions": {
+        "title": "U.S. Regions",
+        "lessons": [
+          { "id": "ss-5-regions-1", "title": "Regions overview", "skills": ["us_regions_overview"], "minutes": 12, "difficulty": 0.0, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-5-regions-2", "title": "The Rocky Mountains", "skills": ["us_regions_rockies"], "minutes": 10, "difficulty": 0.2, "standards": ["D2.Geo.1.3-5"] }
+        ]
+      },
+      "civics": {
+        "title": "Civics",
+        "lessons": [
+          { "id": "ss-5-civics-1", "title": "Branches of government", "skills": ["branches_gov"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.1.3-5"] }
+        ]
+      }
+    }
+  }
+}
