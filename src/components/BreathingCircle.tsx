@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 
 interface BreathingCircleProps {
   onComplete?: () => void;
+  onSkip?: () => void;
   duration?: number; // Total duration in seconds
   className?: string;
 }
 
 export default function BreathingCircle({ 
   onComplete, 
+  onSkip,
   duration = 20, 
   className = '' 
 }: BreathingCircleProps) {
@@ -110,15 +112,14 @@ export default function BreathingCircle({
       </div>
 
       {/* Skip Button */}
-      <button
-        onClick={() => {
-          setIsActive(false);
-          if (onComplete) onComplete();
-        }}
-        className="mt-4 px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md"
-      >
-        Skip mindful break
-      </button>
+      {onSkip && (
+        <button
+          onClick={onSkip}
+          className="mt-4 px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-md"
+        >
+          Skip mindful break
+        </button>
+      )}
     </div>
   );
 }

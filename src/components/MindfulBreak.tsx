@@ -50,7 +50,10 @@ export default function MindfulBreak({
     // Trap focus within modal
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && onSkip) {
+        e.preventDefault();
+        e.stopPropagation();
         onSkip();
+        return;
       }
       
       if (e.key === 'Tab') {
@@ -107,6 +110,7 @@ export default function MindfulBreak({
           <BreathingCircle 
             duration={duration}
             onComplete={onComplete}
+            onSkip={onSkip}
           />
         </div>
 
@@ -118,20 +122,10 @@ export default function MindfulBreak({
           <p className="text-xs text-gray-500 dark:text-gray-500">
             Breathe in as it grows, hold, then breathe out as it shrinks
           </p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+            Press ESC to skip
+          </p>
         </div>
-
-        {/* Skip Option */}
-        {onSkip && (
-          <div className="text-center">
-            <button
-              ref={skipButtonRef}
-              onClick={onSkip}
-              className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded px-2 py-1"
-            >
-              Skip break (press ESC)
-            </button>
-          </div>
-        )}
 
         {/* Screen reader live region */}
         <div className="sr-only" aria-live="polite" role="status">
