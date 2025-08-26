@@ -20,29 +20,37 @@ export default function BreathingCircle({
   const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
-    if (!isActive || timeLeft <= 0) {
-      if (timeLeft <= 0 && onComplete) {
-        onComplete();
-      }
-      return;
-    }
+    if (!isActive) return;
 
     const interval = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
-      
-      // Cycle through breathing phases (4 seconds inhale, 2 seconds hold, 4 seconds exhale)
-      const cycleTime = timeLeft % 10;
-      if (cycleTime >= 6) {
-        setPhase('inhale');
-      } else if (cycleTime >= 4) {
-        setPhase('hold');
-      } else {
-        setPhase('exhale');
-      }
+      setTimeLeft(prev => {
+        const newTime = prev - 1;
+        
+        // If time is up, complete the exercise
+        if (newTime <= 0) {
+          setIsActive(false);
+          if (onComplete) {
+            onComplete();
+          }
+          return 0;
+        }
+        
+        // Cycle through breathing phases (4 seconds inhale, 2 seconds hold, 4 seconds exhale)
+        const cycleTime = newTime % 10;
+        if (cycleTime >= 6) {
+          setPhase('inhale');
+        } else if (cycleTime >= 4) {
+          setPhase('hold');
+        } else {
+          setPhase('exhale');
+        }
+        
+        return newTime;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timeLeft, isActive, onComplete]);
+  }, [isActive, onComplete]);
 
   const getPhaseText = () => {
     switch (phase) {

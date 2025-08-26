@@ -93,7 +93,7 @@ export default function DiagnosticRunner() {
 
   // Get next question when state changes
   useEffect(() => {
-    if (!state || !itemBank.length || !blueprint || !hasStarted) return;
+    if (!state || !itemBank.length || !blueprint || !hasStarted || showMindfulBreak) return;
 
     const next = nextItem(state, itemBank);
     if (next) {
@@ -103,17 +103,16 @@ export default function DiagnosticRunner() {
       // No more items available
       completeAssessment();
     }
-  }, [state, itemBank, blueprint, hasStarted]);
+  }, [state, itemBank, blueprint, hasStarted, showMindfulBreak]);
 
   // Check for mindful break triggers
   useEffect(() => {
-    if (!state || !blueprint) return;
+    if (!state || !blueprint || showMindfulBreak) return;
 
-    if (state.attempts === blueprint.breakAfter || state.mood <= 2) {
-      if (!showMindfulBreak && state.attempts > 0) {
-        setState(prev => prev ? { ...prev, needsBreak: true } : null);
-        setShowMindfulBreak(true);
-      }
+    // Only trigger break if we have made some progress and need one
+    if ((state.attempts === blueprint.breakAfter || state.mood <= 2) && state.attempts > 0) {
+      setState(prev => prev ? { ...prev, needsBreak: true } : null);
+      setShowMindfulBreak(true);
     }
   }, [state?.attempts, state?.mood, blueprint?.breakAfter, showMindfulBreak]);
 
@@ -199,12 +198,24 @@ export default function DiagnosticRunner() {
 
   const handleMindfulBreakComplete = () => {
     setShowMindfulBreak(false);
-    setState(prev => prev ? { ...prev, needsBreak: false } : null);
+    // Clear the break flag and continue
+    setState(prev => {
+      if (prev) {
+        return { ...prev, needsBreak: false };
+      }
+      return prev;
+    });
   };
 
   const handleMindfulBreakSkip = () => {
     setShowMindfulBreak(false);
-    setState(prev => prev ? { ...prev, needsBreak: false } : null);
+    // Clear the break flag and continue
+    setState(prev => {
+      if (prev) {
+        return { ...prev, needsBreak: false };
+      }
+      return prev;
+    });
   };
 
   // Loading state
