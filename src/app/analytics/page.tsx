@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import {
   BarChart3,
   TrendingUp,
@@ -17,6 +18,7 @@ import {
   Download,
   Filter
 } from 'lucide-react';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '../../lib/auth';
 import { getLearningAnalytics, getStudySessions, getAchievements, getAllProgress } from '../../lib/progress';
 
 interface AnalyticsData {
@@ -29,6 +31,7 @@ interface AnalyticsData {
 
 export default function AnalyticsPage() {
   const router = useRouter();
+  const [user, setUser] = useState<any>(null);
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('30'); // days
@@ -42,8 +45,13 @@ export default function AnalyticsPage() {
   ];
 
   useEffect(() => {
-    loadAnalytics();
-  }, [timeRange, selectedSubject]);
+    // Check authentication first
+    const currentUser = requireAuth(router);
+    if (currentUser) {
+      setUser(currentUser);
+      loadAnalytics();
+    }
+  }, [router, timeRange, selectedSubject]);
 
   const loadAnalytics = () => {
     setLoading(true);

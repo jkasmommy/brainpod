@@ -1,4 +1,9 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCurrentUser, initializeAuth, getUserDisplayName } from '../../lib/auth';
 import { BookOpen, Calculator, Microscope, Globe } from 'lucide-react';
 
 const subjects = [
@@ -37,6 +42,32 @@ const subjects = [
 ];
 
 export default function DiagnosticHub() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    initializeAuth();
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      router.push('/signin');
+      return;
+    }
+    setUser(currentUser);
+    setAuthLoading(false);
+  }, [router]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-green-900">
       <div className="container mx-auto px-6 py-16">
@@ -44,10 +75,10 @@ export default function DiagnosticHub() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-6">
-              Adaptive Diagnostics
+              Welcome {user ? getUserDisplayName(user) : 'Learner'}!
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-4">
-              Discover your perfect starting point with our intelligent assessments
+              Choose a subject to discover your perfect starting point
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Our adaptive diagnostics adjust to your responses in real-time, finding your optimal learning level in just a few minutes. 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { getCurrentUser, initializeAuth } from '../../../lib/auth';
 import { 
   DiagItem, 
   DiagState, 
@@ -27,6 +28,8 @@ export default function DiagnosticRunner() {
   const router = useRouter();
   const subject = params.subject as Subject;
 
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [itemBank, setItemBank] = useState<DiagItem[]>([]);
   const [blueprint, setBlueprint] = useState<DiagBlueprint | null>(null);
   const [state, setState] = useState<DiagState | null>(null);
@@ -40,8 +43,23 @@ export default function DiagnosticRunner() {
   const [mood, setMood] = useState<number>(3);
   const [hasStarted, setHasStarted] = useState(false);
 
+  // Check authentication first
+  useEffect(() => {
+    initializeAuth();
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      router.push('/signin');
+      return;
+    }
+    setUser(currentUser);
+    setAuthLoading(false);
+  }, [router]);
+
   // Initialize diagnostic
   useEffect(() => {
+    // Don't initialize if not authenticated yet
+    if (authLoading || !user) return;
+
     async function initialize() {
       try {
         setLoading(true);
@@ -89,7 +107,7 @@ export default function DiagnosticRunner() {
     }
 
     initialize();
-  }, [subject]);
+  }, [subject, authLoading, user]);
 
   // Get next question when state changes
   useEffect(() => {
@@ -217,6 +235,18 @@ export default function DiagnosticRunner() {
       return prev;
     });
   };
+
+  // Authentication loading state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Loading state
   if (loading) {

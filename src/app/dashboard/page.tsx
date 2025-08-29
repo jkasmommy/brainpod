@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import { 
   Calendar, 
   BookOpen, 
@@ -58,6 +59,7 @@ const subjects = [
 
 export default function Dashboard() {
   const router = useRouter();
+  const [user, setUser] = useState<any>(null);
   const [progressData, setProgressData] = useState<ProgressData[]>([]);
   const [activityHistory, setActivityHistory] = useState<ActivityItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -66,8 +68,13 @@ export default function Dashboard() {
   const [weeklyGoal, setWeeklyGoal] = useState({ completed: 0, target: 20 });
 
   useEffect(() => {
-    loadDashboardData();
-  }, []);
+    // Check authentication first
+    const currentUser = requireAuth(router);
+    if (currentUser) {
+      setUser(currentUser);
+      loadDashboardData();
+    }
+  }, [router]);
 
   const loadDashboardData = () => {
     setLoading(true);
@@ -275,7 +282,7 @@ export default function Dashboard() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
-              Learning Dashboard 📊
+              Welcome back, {user ? getUserDisplayName(user) : 'Learner'}! 📊
             </h1>
             <p className="text-xl text-gray-700 dark:text-gray-300">
               Track your progress and celebrate achievements
