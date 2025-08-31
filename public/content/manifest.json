@@ -25,6 +25,149 @@
         ]
       }
     },
+    "2": {
+      "place-value": {
+        "title": "Place Value (Hundreds)",
+        "lessons": [
+          { "id": "math-2-pv-1", "title": "Hundreds, tens, ones", "skills": ["pv_hundreds"], "minutes": 12, "difficulty": 0.3, "standards": ["2.NBT.A.1"] },
+          { "id": "math-2-pv-2", "title": "Skip count by 5s, 10s, 100s", "skills": ["skip_count"], "minutes": 10, "difficulty": 0.2, "standards": ["2.NBT.A.2"] },
+          { "id": "math-2-compare-1", "title": "Compare 3-digit numbers", "skills": ["compare_3digit"], "minutes": 12, "difficulty": 0.4, "standards": ["2.NBT.A.4"] }
+        ]
+      },
+      "add-sub": {
+        "title": "Addition & Subtraction within 100",
+        "lessons": [
+          { "id": "math-2-add-1", "title": "Add 2-digit numbers", "skills": ["add_2digit"], "minutes": 15, "difficulty": 0.5, "standards": ["2.NBT.B.5"] },
+          { "id": "math-2-sub-1", "title": "Subtract 2-digit numbers", "skills": ["sub_2digit"], "minutes": 15, "difficulty": 0.6, "standards": ["2.NBT.B.5"] },
+          { "id": "math-2-mental-1", "title": "Mental math strategies", "skills": ["mental_math"], "minutes": 12, "difficulty": 0.4, "standards": ["2.NBT.B.7"] }
+        ]
+      },
+      "measurement": {
+        "title": "Measurement & Data",
+        "lessons": [
+          { "id": "math-2-length-1", "title": "Measure length in inches", "skills": ["measure_inches"], "minutes": 10, "difficulty": 0.3, "standards": ["2.MD.A.1"] },
+          { "id": "math-2-length-2", "title": "Measure length in centimeters", "skills": ["measure_cm"], "minutes": 10, "difficulty": 0.3, "standards": ["2.MD.A.1"] },
+          { "id": "math-2-time-1", "title": "Tell time to 5 minutes", "skills": ["tell_time_5min"], "minutes": 12, "difficulty": 0.4, "standards": ["2.MD.C.7"] }
+        ]
+      }
+    },
+    "3": {
+      "multiplication": {
+        "title": "Multiplication & Division",
+        "lessons": [
+          { "id": "math-3-mult-1", "title": "Multiplication as groups", "skills": ["mult_groups"], "minutes": 12, "difficulty": 0.1, "standards": ["3.OA.A.1"] },
+          { "id": "math-3-mult-2", "title": "Multiplication facts 0-5", "skills": ["mult_facts_0_5"], "minutes": 15, "difficulty": 0.3, "standards": ["3.OA.C.7"] },
+          { "id": "math-3-mult-3", "title": "Multiplication facts 6-10", "skills": ["mult_facts_6_10"], "minutes": 15, "difficulty": 0.5, "standards": ["3.OA.C.7"] },
+          { "id": "math-3-div-1", "title": "Division as sharing", "skills": ["div_sharing"], "minutes": 12, "difficulty": 0.2, "standards": ["3.OA.A.2"] },
+          { "id": "math-3-div-2", "title": "Division facts", "skills": ["div_facts"], "minutes": 15, "difficulty": 0.4, "standards": ["3.OA.C.7"] },
+          { "id": "math-3-patterns-1", "title": "Multiplication patterns", "skills": ["mult_patterns"], "minutes": 12, "difficulty": 0.3, "standards": ["3.OA.D.8"] }
+        ]
+      },
+      "place-value": {
+        "title": "Place Value & Rounding",
+        "lessons": [
+          { "id": "math-3-pv-1", "title": "Place value to 1000", "skills": ["pv_1000"], "minutes": 12, "difficulty": 0.2, "standards": ["3.NBT.A.1"] },
+          { "id": "math-3-round-1", "title": "Round to nearest 10", "skills": ["round_10"], "minutes": 10, "difficulty": 0.3, "standards": ["3.NBT.A.1"] },
+          { "id": "math-3-round-2", "title": "Round to nearest 100", "skills": ["round_100"], "minutes": 10, "difficulty": 0.4, "standards": ["3.NBT.A.1"] },
+          { "id": "math-3-add-1", "title": "Add within 1000", "skills": ["add_1000"], "minutes": 15, "difficulty": 0.5, "standards": ["3.NBT.A.2"] },
+          { "id": "math-3-sub-1", "title": "Subtract within 1000", "skills": ["sub_1000"], "minutes": 15, "difficulty": 0.6, "standards": ["3.NBT.A.2"] }
+        ]
+      },
+      "fractions": {
+        "title": "Fractions",
+        "lessons": [
+          { "id": "math-3-frac-1", "title": "Unit fractions", "skills": ["unit_fractions"], "minutes": 12, "difficulty": 0.2, "standards": ["3.NF.A.1"] },
+          { "id": "math-3-frac-2", "title": "Fractions on number line", "skills": ["frac_number_line"], "minutes": 15, "difficulty": 0.4, "standards": ["3.NF.A.2"] },
+          { "id": "math-3-frac-3", "title": "Compare fractions", "skills": ["compare_fractions"], "minutes": 15, "difficulty": 0.5, "standards": ["3.NF.A.3"] },
+          { "id": "math-3-frac-4", "title": "Equivalent fractions", "skills": ["equiv_fractions"], "minutes": 18, "difficulty": 0.6, "standards": ["3.NF.A.3"] }
+        ]
+      },
+      "geometry": {
+        "title": "Geometry",
+        "lessons": [
+          { "id": "math-3-geo-1", "title": "Shapes and attributes", "skills": ["shapes_attributes"], "minutes": 12, "difficulty": 0.2, "standards": ["3.G.A.1"] },
+          { "id": "math-3-geo-2", "title": "Area with unit squares", "skills": ["area_unit_squares"], "minutes": 15, "difficulty": 0.4, "standards": ["3.MD.C.5"] },
+          { "id": "math-3-geo-3", "title": "Perimeter", "skills": ["perimeter"], "minutes": 12, "difficulty": 0.3, "standards": ["3.MD.D.8"] }
+        ]
+      }
+    },
+    "4": {
+      "place-value": {
+        "title": "Place Value to 1,000,000",
+        "lessons": [
+          { "id": "math-4-pv-1", "title": "Place value to 10,000", "skills": ["pv_10000"], "minutes": 12, "difficulty": 0.3, "standards": ["4.NBT.A.1"] },
+          { "id": "math-4-pv-2", "title": "Place value to 1,000,000", "skills": ["pv_1000000"], "minutes": 15, "difficulty": 0.4, "standards": ["4.NBT.A.1"] },
+          { "id": "math-4-compare-1", "title": "Compare large numbers", "skills": ["compare_large"], "minutes": 12, "difficulty": 0.3, "standards": ["4.NBT.A.2"] },
+          { "id": "math-4-round-1", "title": "Round to any place value", "skills": ["round_any_place"], "minutes": 12, "difficulty": 0.4, "standards": ["4.NBT.A.3"] }
+        ]
+      },
+      "operations": {
+        "title": "Multi-digit Operations",
+        "lessons": [
+          { "id": "math-4-add-1", "title": "Add multi-digit numbers", "skills": ["add_multidigit"], "minutes": 15, "difficulty": 0.5, "standards": ["4.NBT.B.4"] },
+          { "id": "math-4-sub-1", "title": "Subtract multi-digit numbers", "skills": ["sub_multidigit"], "minutes": 15, "difficulty": 0.6, "standards": ["4.NBT.B.4"] },
+          { "id": "math-4-mult-1", "title": "Multiply by 1-digit", "skills": ["mult_1digit"], "minutes": 18, "difficulty": 0.7, "standards": ["4.NBT.B.5"] },
+          { "id": "math-4-mult-2", "title": "Multiply by 2-digit", "skills": ["mult_2digit"], "minutes": 20, "difficulty": 0.8, "standards": ["4.NBT.B.5"] },
+          { "id": "math-4-div-1", "title": "Divide by 1-digit", "skills": ["div_1digit"], "minutes": 18, "difficulty": 0.7, "standards": ["4.NBT.B.6"] }
+        ]
+      },
+      "fractions": {
+        "title": "Fraction Operations",
+        "lessons": [
+          { "id": "math-4-frac-1", "title": "Equivalent fractions", "skills": ["equiv_frac_4"], "minutes": 15, "difficulty": 0.4, "standards": ["4.NF.A.1"] },
+          { "id": "math-4-frac-2", "title": "Compare fractions", "skills": ["compare_frac_4"], "minutes": 15, "difficulty": 0.5, "standards": ["4.NF.A.2"] },
+          { "id": "math-4-frac-3", "title": "Add fractions (same denominator)", "skills": ["add_frac_same"], "minutes": 18, "difficulty": 0.6, "standards": ["4.NF.B.3"] },
+          { "id": "math-4-frac-4", "title": "Subtract fractions (same denominator)", "skills": ["sub_frac_same"], "minutes": 18, "difficulty": 0.6, "standards": ["4.NF.B.3"] },
+          { "id": "math-4-frac-5", "title": "Mixed numbers", "skills": ["mixed_numbers"], "minutes": 20, "difficulty": 0.7, "standards": ["4.NF.B.3"] },
+          { "id": "math-4-decimal-1", "title": "Decimals and fractions", "skills": ["decimals_fractions"], "minutes": 18, "difficulty": 0.6, "standards": ["4.NF.C.6"] }
+        ]
+      },
+      "measurement": {
+        "title": "Measurement & Geometry",
+        "lessons": [
+          { "id": "math-4-measure-1", "title": "Convert measurements", "skills": ["convert_measurements"], "minutes": 15, "difficulty": 0.5, "standards": ["4.MD.A.1"] },
+          { "id": "math-4-area-1", "title": "Area and perimeter", "skills": ["area_perimeter"], "minutes": 18, "difficulty": 0.6, "standards": ["4.MD.A.3"] },
+          { "id": "math-4-angles-1", "title": "Measure angles", "skills": ["measure_angles"], "minutes": 15, "difficulty": 0.5, "standards": ["4.MD.C.6"] },
+          { "id": "math-4-geo-1", "title": "Lines and angles", "skills": ["lines_angles"], "minutes": 12, "difficulty": 0.4, "standards": ["4.G.A.1"] }
+        ]
+      }
+    },
+    "5": {
+      "place-value": {
+        "title": "Decimal Place Value",
+        "lessons": [
+          { "id": "math-5-decimal-1", "title": "Decimal place value", "skills": ["decimal_place_value"], "minutes": 15, "difficulty": 0.4, "standards": ["5.NBT.A.1"] },
+          { "id": "math-5-decimal-2", "title": "Compare decimals", "skills": ["compare_decimals"], "minutes": 12, "difficulty": 0.5, "standards": ["5.NBT.A.3"] },
+          { "id": "math-5-round-1", "title": "Round decimals", "skills": ["round_decimals"], "minutes": 12, "difficulty": 0.4, "standards": ["5.NBT.A.4"] }
+        ]
+      },
+      "operations": {
+        "title": "Decimal Operations",
+        "lessons": [
+          { "id": "math-5-add-dec-1", "title": "Add decimals", "skills": ["add_decimals"], "minutes": 18, "difficulty": 0.6, "standards": ["5.NBT.B.7"] },
+          { "id": "math-5-sub-dec-1", "title": "Subtract decimals", "skills": ["sub_decimals"], "minutes": 18, "difficulty": 0.6, "standards": ["5.NBT.B.7"] },
+          { "id": "math-5-mult-dec-1", "title": "Multiply decimals", "skills": ["mult_decimals"], "minutes": 20, "difficulty": 0.8, "standards": ["5.NBT.B.7"] },
+          { "id": "math-5-div-dec-1", "title": "Divide decimals", "skills": ["div_decimals"], "minutes": 22, "difficulty": 0.9, "standards": ["5.NBT.B.7"] }
+        ]
+      },
+      "fractions": {
+        "title": "Fraction Operations",
+        "lessons": [
+          { "id": "math-5-frac-1", "title": "Add fractions (different denominators)", "skills": ["add_frac_diff"], "minutes": 20, "difficulty": 0.7, "standards": ["5.NF.A.1"] },
+          { "id": "math-5-frac-2", "title": "Subtract fractions (different denominators)", "skills": ["sub_frac_diff"], "minutes": 20, "difficulty": 0.7, "standards": ["5.NF.A.1"] },
+          { "id": "math-5-frac-3", "title": "Multiply fractions", "skills": ["mult_fractions"], "minutes": 18, "difficulty": 0.8, "standards": ["5.NF.B.4"] },
+          { "id": "math-5-frac-4", "title": "Divide fractions", "skills": ["div_fractions"], "minutes": 22, "difficulty": 0.9, "standards": ["5.NF.B.7"] }
+        ]
+      },
+      "volume": {
+        "title": "Volume & Geometry",
+        "lessons": [
+          { "id": "math-5-volume-1", "title": "Volume with unit cubes", "skills": ["volume_unit_cubes"], "minutes": 15, "difficulty": 0.5, "standards": ["5.MD.C.3"] },
+          { "id": "math-5-volume-2", "title": "Volume formulas", "skills": ["volume_formulas"], "minutes": 18, "difficulty": 0.6, "standards": ["5.MD.C.5"] },
+          { "id": "math-5-coord-1", "title": "Coordinate plane", "skills": ["coordinate_plane"], "minutes": 15, "difficulty": 0.6, "standards": ["5.G.A.1"] }
+        ]
+      }
+    },
     "6": { 
       "ratios": { 
         "title": "Ratios & Rates", 
@@ -85,6 +228,143 @@
         ]
       }
     },
+    "1": {
+      "phonics": {
+        "title": "Phonics & Word Recognition",
+        "lessons": [
+          { "id": "reading-1-phonics-1", "title": "Long vowel sounds", "skills": ["long_vowels"], "minutes": 12, "difficulty": 0.1, "standards": ["RF.1.3"] },
+          { "id": "reading-1-phonics-2", "title": "Consonant blends", "skills": ["consonant_blends"], "minutes": 12, "difficulty": 0.2, "standards": ["RF.1.3"] },
+          { "id": "reading-1-sight-1", "title": "High-frequency words", "skills": ["high_freq_words"], "minutes": 10, "difficulty": 0.1, "standards": ["RF.1.3"] }
+        ]
+      },
+      "fluency": {
+        "title": "Reading Fluency",
+        "lessons": [
+          { "id": "reading-1-fluency-1", "title": "Read with expression", "skills": ["read_expression"], "minutes": 15, "difficulty": 0.3, "standards": ["RF.1.4"] },
+          { "id": "reading-1-fluency-2", "title": "Reading rate and accuracy", "skills": ["read_accuracy"], "minutes": 15, "difficulty": 0.2, "standards": ["RF.1.4"] }
+        ]
+      },
+      "comprehension": {
+        "title": "Reading Comprehension",
+        "lessons": [
+          { "id": "reading-1-comp-1", "title": "Main idea", "skills": ["main_idea_1"], "minutes": 12, "difficulty": 0.2, "standards": ["RL.1.2"] },
+          { "id": "reading-1-comp-2", "title": "Story elements", "skills": ["story_elements"], "minutes": 15, "difficulty": 0.3, "standards": ["RL.1.3"] }
+        ]
+      }
+    },
+    "2": {
+      "phonics": {
+        "title": "Advanced Phonics",
+        "lessons": [
+          { "id": "reading-2-phonics-1", "title": "Vowel teams", "skills": ["vowel_teams"], "minutes": 12, "difficulty": 0.2, "standards": ["RF.2.3"] },
+          { "id": "reading-2-phonics-2", "title": "Silent letters", "skills": ["silent_letters"], "minutes": 12, "difficulty": 0.3, "standards": ["RF.2.3"] },
+          { "id": "reading-2-phonics-3", "title": "R-controlled vowels", "skills": ["r_controlled"], "minutes": 12, "difficulty": 0.3, "standards": ["RF.2.3"] }
+        ]
+      },
+      "fluency": {
+        "title": "Fluency Development",
+        "lessons": [
+          { "id": "reading-2-fluency-1", "title": "Read with purpose", "skills": ["read_purpose"], "minutes": 15, "difficulty": 0.4, "standards": ["RF.2.4"] },
+          { "id": "reading-2-fluency-2", "title": "Self-correct reading", "skills": ["self_correct"], "minutes": 12, "difficulty": 0.3, "standards": ["RF.2.4"] }
+        ]
+      },
+      "comprehension": {
+        "title": "Story Analysis",
+        "lessons": [
+          { "id": "reading-2-comp-1", "title": "Character analysis", "skills": ["character_analysis"], "minutes": 15, "difficulty": 0.4, "standards": ["RL.2.3"] },
+          { "id": "reading-2-comp-2", "title": "Sequence of events", "skills": ["sequence_events"], "minutes": 12, "difficulty": 0.3, "standards": ["RL.2.5"] },
+          { "id": "reading-2-comp-3", "title": "Compare and contrast", "skills": ["compare_contrast"], "minutes": 15, "difficulty": 0.5, "standards": ["RL.2.9"] }
+        ]
+      }
+    },
+    "3": {
+      "fluency": {
+        "title": "Reading Fluency",
+        "lessons": [
+          { "id": "reading-3-fluency-1", "title": "Read grade-level text fluently", "skills": ["fluent_reading_3"], "minutes": 15, "difficulty": 0.4, "standards": ["RF.3.4"] },
+          { "id": "reading-3-fluency-2", "title": "Use context for comprehension", "skills": ["context_comprehension"], "minutes": 12, "difficulty": 0.5, "standards": ["RF.3.4"] }
+        ]
+      },
+      "literature": {
+        "title": "Literature",
+        "lessons": [
+          { "id": "reading-3-lit-1", "title": "Theme and central message", "skills": ["theme_central"], "minutes": 15, "difficulty": 0.5, "standards": ["RL.3.2"] },
+          { "id": "reading-3-lit-2", "title": "Character traits and motivation", "skills": ["character_traits"], "minutes": 18, "difficulty": 0.6, "standards": ["RL.3.3"] },
+          { "id": "reading-3-lit-3", "title": "Point of view", "skills": ["point_of_view"], "minutes": 15, "difficulty": 0.6, "standards": ["RL.3.6"] },
+          { "id": "reading-3-lit-4", "title": "Compare stories", "skills": ["compare_stories"], "minutes": 18, "difficulty": 0.7, "standards": ["RL.3.9"] }
+        ]
+      },
+      "informational": {
+        "title": "Informational Text",
+        "lessons": [
+          { "id": "reading-3-info-1", "title": "Main idea and details", "skills": ["main_idea_details"], "minutes": 15, "difficulty": 0.5, "standards": ["RI.3.2"] },
+          { "id": "reading-3-info-2", "title": "Text features", "skills": ["text_features"], "minutes": 12, "difficulty": 0.4, "standards": ["RI.3.5"] },
+          { "id": "reading-3-info-3", "title": "Author's purpose", "skills": ["authors_purpose"], "minutes": 15, "difficulty": 0.6, "standards": ["RI.3.6"] }
+        ]
+      },
+      "vocabulary": {
+        "title": "Vocabulary",
+        "lessons": [
+          { "id": "reading-3-vocab-1", "title": "Context clues", "skills": ["context_clues_3"], "minutes": 12, "difficulty": 0.4, "standards": ["L.3.4"] },
+          { "id": "reading-3-vocab-2", "title": "Prefixes and suffixes", "skills": ["prefixes_suffixes"], "minutes": 15, "difficulty": 0.5, "standards": ["L.3.4"] }
+        ]
+      }
+    },
+    "4": {
+      "literature": {
+        "title": "Literature Analysis",
+        "lessons": [
+          { "id": "reading-4-lit-1", "title": "Theme from details", "skills": ["theme_details"], "minutes": 18, "difficulty": 0.6, "standards": ["RL.4.2"] },
+          { "id": "reading-4-lit-2", "title": "Character, setting, events", "skills": ["character_setting_events"], "minutes": 20, "difficulty": 0.7, "standards": ["RL.4.3"] },
+          { "id": "reading-4-lit-3", "title": "Poetry structure", "skills": ["poetry_structure"], "minutes": 15, "difficulty": 0.6, "standards": ["RL.4.5"] },
+          { "id": "reading-4-lit-4", "title": "Compare perspectives", "skills": ["compare_perspectives"], "minutes": 18, "difficulty": 0.8, "standards": ["RL.4.6"] }
+        ]
+      },
+      "informational": {
+        "title": "Informational Text Skills",
+        "lessons": [
+          { "id": "reading-4-info-1", "title": "Summarize informational text", "skills": ["summarize_info"], "minutes": 18, "difficulty": 0.7, "standards": ["RI.4.2"] },
+          { "id": "reading-4-info-2", "title": "Explain events and concepts", "skills": ["explain_events"], "minutes": 20, "difficulty": 0.8, "standards": ["RI.4.3"] },
+          { "id": "reading-4-info-3", "title": "Text structure", "skills": ["text_structure"], "minutes": 15, "difficulty": 0.6, "standards": ["RI.4.5"] },
+          { "id": "reading-4-info-4", "title": "Multiple accounts", "skills": ["multiple_accounts"], "minutes": 18, "difficulty": 0.8, "standards": ["RI.4.6"] }
+        ]
+      },
+      "vocabulary": {
+        "title": "Advanced Vocabulary",
+        "lessons": [
+          { "id": "reading-4-vocab-1", "title": "Context clues strategies", "skills": ["context_strategies"], "minutes": 15, "difficulty": 0.6, "standards": ["L.4.4"] },
+          { "id": "reading-4-vocab-2", "title": "Greek and Latin roots", "skills": ["greek_latin_roots"], "minutes": 18, "difficulty": 0.7, "standards": ["L.4.4"] },
+          { "id": "reading-4-vocab-3", "title": "Figurative language", "skills": ["figurative_language"], "minutes": 15, "difficulty": 0.7, "standards": ["L.4.5"] }
+        ]
+      }
+    },
+    "5": {
+      "literature": {
+        "title": "Literary Analysis",
+        "lessons": [
+          { "id": "reading-5-lit-1", "title": "Quote accurately from text", "skills": ["quote_accurately"], "minutes": 18, "difficulty": 0.7, "standards": ["RL.5.1"] },
+          { "id": "reading-5-lit-2", "title": "Theme across stories", "skills": ["theme_across"], "minutes": 20, "difficulty": 0.8, "standards": ["RL.5.2"] },
+          { "id": "reading-5-lit-3", "title": "Character interactions", "skills": ["character_interactions"], "minutes": 22, "difficulty": 0.8, "standards": ["RL.5.3"] },
+          { "id": "reading-5-lit-4", "title": "Narrator and speaker", "skills": ["narrator_speaker"], "minutes": 18, "difficulty": 0.7, "standards": ["RL.5.6"] }
+        ]
+      },
+      "informational": {
+        "title": "Complex Informational Text",
+        "lessons": [
+          { "id": "reading-5-info-1", "title": "Quote from informational text", "skills": ["quote_info"], "minutes": 18, "difficulty": 0.7, "standards": ["RI.5.1"] },
+          { "id": "reading-5-info-2", "title": "Main ideas and supporting details", "skills": ["main_ideas_support"], "minutes": 20, "difficulty": 0.8, "standards": ["RI.5.2"] },
+          { "id": "reading-5-info-3", "title": "Relationships between ideas", "skills": ["relationships_ideas"], "minutes": 22, "difficulty": 0.9, "standards": ["RI.5.3"] },
+          { "id": "reading-5-info-4", "title": "Compare texts on same topic", "skills": ["compare_texts"], "minutes": 25, "difficulty": 0.9, "standards": ["RI.5.9"] }
+        ]
+      },
+      "vocabulary": {
+        "title": "Academic Vocabulary",
+        "lessons": [
+          { "id": "reading-5-vocab-1", "title": "Word relationships", "skills": ["word_relationships"], "minutes": 15, "difficulty": 0.7, "standards": ["L.5.5"] },
+          { "id": "reading-5-vocab-2", "title": "Academic and domain-specific words", "skills": ["academic_vocab"], "minutes": 18, "difficulty": 0.8, "standards": ["L.5.6"] }
+        ]
+      }
+    },
     "6": { 
       "argument": { 
         "title": "Argument Writing", 
@@ -111,18 +391,177 @@
     }
   },
   "science": {
+    "K": {
+      "plants-animals": {
+        "title": "Plants & Animals",
+        "lessons": [
+          { "id": "science-k-plants-1", "title": "What plants need", "skills": ["plant_needs"], "minutes": 10, "difficulty": -0.5, "standards": ["K-LS1-1"] },
+          { "id": "science-k-animals-1", "title": "What animals need", "skills": ["animal_needs"], "minutes": 10, "difficulty": -0.3, "standards": ["K-LS1-1"] }
+        ]
+      },
+      "weather": {
+        "title": "Weather & Seasons",
+        "lessons": [
+          { "id": "science-k-weather-1", "title": "Types of weather", "skills": ["weather_types"], "minutes": 8, "difficulty": -0.4, "standards": ["K-ESS2-1"] },
+          { "id": "science-k-seasons-1", "title": "The four seasons", "skills": ["four_seasons"], "minutes": 10, "difficulty": -0.2, "standards": ["K-ESS2-1"] }
+        ]
+      }
+    },
+    "1": {
+      "plants": {
+        "title": "Plant Structures",
+        "lessons": [
+          { "id": "science-1-plants-1", "title": "Plant parts and functions", "skills": ["plant_parts"], "minutes": 12, "difficulty": 0.1, "standards": ["1-LS1-1"] },
+          { "id": "science-1-plants-2", "title": "How plants grow", "skills": ["plant_growth"], "minutes": 12, "difficulty": 0.2, "standards": ["1-LS1-1"] }
+        ]
+      },
+      "light-sound": {
+        "title": "Light & Sound",
+        "lessons": [
+          { "id": "science-1-light-1", "title": "Sources of light", "skills": ["light_sources"], "minutes": 10, "difficulty": 0.1, "standards": ["1-PS4-2"] },
+          { "id": "science-1-sound-1", "title": "Making sounds", "skills": ["making_sounds"], "minutes": 12, "difficulty": 0.2, "standards": ["1-PS4-1"] }
+        ]
+      },
+      "space": {
+        "title": "Sun, Moon & Stars",
+        "lessons": [
+          { "id": "science-1-sun-1", "title": "The sun in the sky", "skills": ["sun_patterns"], "minutes": 10, "difficulty": 0.1, "standards": ["1-ESS1-1"] },
+          { "id": "science-1-moon-1", "title": "Moon shapes", "skills": ["moon_phases"], "minutes": 12, "difficulty": 0.3, "standards": ["1-ESS1-1"] }
+        ]
+      }
+    },
+    "2": {
+      "habitats": {
+        "title": "Plant & Animal Habitats",
+        "lessons": [
+          { "id": "science-2-habitat-1", "title": "Where animals live", "skills": ["animal_habitats"], "minutes": 12, "difficulty": 0.2, "standards": ["2-LS4-1"] },
+          { "id": "science-2-habitat-2", "title": "How habitats meet needs", "skills": ["habitat_needs"], "minutes": 15, "difficulty": 0.3, "standards": ["2-LS4-1"] },
+          { "id": "science-2-plants-1", "title": "How plants disperse seeds", "skills": ["seed_dispersal"], "minutes": 12, "difficulty": 0.4, "standards": ["2-LS2-1"] }
+        ]
+      },
+      "materials": {
+        "title": "Properties of Materials",
+        "lessons": [
+          { "id": "science-2-materials-1", "title": "Properties of objects", "skills": ["object_properties"], "minutes": 12, "difficulty": 0.2, "standards": ["2-PS1-1"] },
+          { "id": "science-2-materials-2", "title": "Testing materials", "skills": ["material_testing"], "minutes": 15, "difficulty": 0.4, "standards": ["2-PS1-2"] }
+        ]
+      },
+      "earth": {
+        "title": "Earth's Materials",
+        "lessons": [
+          { "id": "science-2-earth-1", "title": "Land and water", "skills": ["land_water"], "minutes": 10, "difficulty": 0.2, "standards": ["2-ESS1-1"] },
+          { "id": "science-2-earth-2", "title": "Slow and fast changes", "skills": ["earth_changes"], "minutes": 15, "difficulty": 0.4, "standards": ["2-ESS1-1"] }
+        ]
+      }
+    },
     "3": {
       "life-cycles": {
         "title": "Life Cycles",
         "lessons": [
           { "id": "science-3-life-1", "title": "Frog life cycle", "skills": ["life_cycle_frog"], "minutes": 12, "difficulty": 0.0, "standards": ["3-LS1-1"] },
-          { "id": "science-3-life-2", "title": "Butterfly life cycle", "skills": ["life_cycle_butterfly"], "minutes": 12, "difficulty": 0.2, "standards": ["3-LS1-1"] }
+          { "id": "science-3-life-2", "title": "Butterfly life cycle", "skills": ["life_cycle_butterfly"], "minutes": 12, "difficulty": 0.2, "standards": ["3-LS1-1"] },
+          { "id": "science-3-life-3", "title": "Plant life cycles", "skills": ["plant_life_cycle"], "minutes": 15, "difficulty": 0.3, "standards": ["3-LS1-1"] }
+        ]
+      },
+      "heredity": {
+        "title": "Heredity & Traits",
+        "lessons": [
+          { "id": "science-3-traits-1", "title": "Inherited traits", "skills": ["inherited_traits"], "minutes": 12, "difficulty": 0.2, "standards": ["3-LS3-1"] },
+          { "id": "science-3-traits-2", "title": "Environmental traits", "skills": ["environmental_traits"], "minutes": 15, "difficulty": 0.4, "standards": ["3-LS3-2"] }
+        ]
+      },
+      "environments": {
+        "title": "Environments & Survival",
+        "lessons": [
+          { "id": "science-3-env-1", "title": "How environments change", "skills": ["environment_changes"], "minutes": 15, "difficulty": 0.4, "standards": ["3-LS4-3"] },
+          { "id": "science-3-env-2", "title": "Animal adaptations", "skills": ["animal_adaptations"], "minutes": 18, "difficulty": 0.5, "standards": ["3-LS4-2"] }
         ]
       },
       "matter": {
         "title": "Matter",
         "lessons": [
-          { "id": "science-3-matter-1", "title": "Solids, liquids, gases", "skills": ["states_of_matter"], "minutes": 10, "difficulty": 0.3, "standards": ["3-PS1-3"] }
+          { "id": "science-3-matter-1", "title": "Solids, liquids, gases", "skills": ["states_of_matter"], "minutes": 10, "difficulty": 0.3, "standards": ["2-PS1-1"] },
+          { "id": "science-3-matter-2", "title": "Heating and cooling", "skills": ["heating_cooling"], "minutes": 15, "difficulty": 0.4, "standards": ["2-PS1-4"] }
+        ]
+      },
+      "forces": {
+        "title": "Forces & Motion",
+        "lessons": [
+          { "id": "science-3-forces-1", "title": "Balanced and unbalanced forces", "skills": ["balanced_forces"], "minutes": 15, "difficulty": 0.5, "standards": ["3-PS2-1"] },
+          { "id": "science-3-forces-2", "title": "Magnetic forces", "skills": ["magnetic_forces"], "minutes": 12, "difficulty": 0.4, "standards": ["3-PS2-3"] }
+        ]
+      },
+      "weather": {
+        "title": "Weather & Climate",
+        "lessons": [
+          { "id": "science-3-weather-1", "title": "Weather patterns", "skills": ["weather_patterns"], "minutes": 12, "difficulty": 0.3, "standards": ["3-ESS2-1"] },
+          { "id": "science-3-weather-2", "title": "Climate vs weather", "skills": ["climate_weather"], "minutes": 15, "difficulty": 0.5, "standards": ["3-ESS2-2"] }
+        ]
+      }
+    },
+    "4": {
+      "energy": {
+        "title": "Energy",
+        "lessons": [
+          { "id": "science-4-energy-1", "title": "Forms of energy", "skills": ["energy_forms"], "minutes": 15, "difficulty": 0.4, "standards": ["4-PS3-1"] },
+          { "id": "science-4-energy-2", "title": "Energy transfer", "skills": ["energy_transfer"], "minutes": 18, "difficulty": 0.6, "standards": ["4-PS3-2"] },
+          { "id": "science-4-energy-3", "title": "Speed and energy", "skills": ["speed_energy"], "minutes": 15, "difficulty": 0.5, "standards": ["4-PS3-1"] }
+        ]
+      },
+      "waves": {
+        "title": "Waves",
+        "lessons": [
+          { "id": "science-4-waves-1", "title": "Wave patterns", "skills": ["wave_patterns"], "minutes": 12, "difficulty": 0.4, "standards": ["4-PS4-1"] },
+          { "id": "science-4-waves-2", "title": "Light and reflection", "skills": ["light_reflection"], "minutes": 15, "difficulty": 0.5, "standards": ["4-PS4-2"] },
+          { "id": "science-4-waves-3", "title": "Information transfer", "skills": ["info_transfer"], "minutes": 18, "difficulty": 0.6, "standards": ["4-PS4-3"] }
+        ]
+      },
+      "structures": {
+        "title": "Animal Structures",
+        "lessons": [
+          { "id": "science-4-struct-1", "title": "Internal structures", "skills": ["internal_structures"], "minutes": 18, "difficulty": 0.6, "standards": ["4-LS1-1"] },
+          { "id": "science-4-struct-2", "title": "Sense receptors", "skills": ["sense_receptors"], "minutes": 15, "difficulty": 0.5, "standards": ["4-LS1-2"] }
+        ]
+      },
+      "earth-processes": {
+        "title": "Earth's Processes",
+        "lessons": [
+          { "id": "science-4-earth-1", "title": "Weathering and erosion", "skills": ["weathering_erosion"], "minutes": 18, "difficulty": 0.5, "standards": ["4-ESS1-1"] },
+          { "id": "science-4-earth-2", "title": "Rock layers", "skills": ["rock_layers"], "minutes": 15, "difficulty": 0.6, "standards": ["4-ESS1-1"] },
+          { "id": "science-4-earth-3", "title": "Natural hazards", "skills": ["natural_hazards"], "minutes": 20, "difficulty": 0.7, "standards": ["4-ESS3-2"] }
+        ]
+      }
+    },
+    "5": {
+      "ecosystems": {
+        "title": "Ecosystems",
+        "lessons": [
+          { "id": "science-5-eco-1", "title": "Plant and animal interactions", "skills": ["plant_animal_interactions"], "minutes": 18, "difficulty": 0.6, "standards": ["5-LS2-1"] },
+          { "id": "science-5-eco-2", "title": "Food webs", "skills": ["food_webs"], "minutes": 20, "difficulty": 0.7, "standards": ["5-LS2-1"] },
+          { "id": "science-5-eco-3", "title": "Environmental changes", "skills": ["environmental_changes"], "minutes": 22, "difficulty": 0.8, "standards": ["5-ESS3-1"] }
+        ]
+      },
+      "matter": {
+        "title": "Matter & Chemical Reactions",
+        "lessons": [
+          { "id": "science-5-matter-1", "title": "Properties of matter", "skills": ["matter_properties"], "minutes": 15, "difficulty": 0.5, "standards": ["5-PS1-3"] },
+          { "id": "science-5-matter-2", "title": "Chemical vs physical changes", "skills": ["chemical_physical"], "minutes": 20, "difficulty": 0.7, "standards": ["5-PS1-4"] },
+          { "id": "science-5-matter-3", "title": "Conservation of matter", "skills": ["conservation_matter"], "minutes": 18, "difficulty": 0.6, "standards": ["5-PS1-2"] }
+        ]
+      },
+      "earth-systems": {
+        "title": "Earth's Systems",
+        "lessons": [
+          { "id": "science-5-systems-1", "title": "Earth's major systems", "skills": ["earth_systems"], "minutes": 18, "difficulty": 0.6, "standards": ["5-ESS2-1"] },
+          { "id": "science-5-systems-2", "title": "Water cycle", "skills": ["water_cycle"], "minutes": 20, "difficulty": 0.7, "standards": ["5-ESS2-2"] },
+          { "id": "science-5-systems-3", "title": "Human impact", "skills": ["human_impact"], "minutes": 22, "difficulty": 0.8, "standards": ["5-ESS3-1"] }
+        ]
+      },
+      "space": {
+        "title": "Stars & Solar System",
+        "lessons": [
+          { "id": "science-5-space-1", "title": "The sun and other stars", "skills": ["sun_stars"], "minutes": 15, "difficulty": 0.5, "standards": ["5-ESS1-1"] },
+          { "id": "science-5-space-2", "title": "Earth's place in the universe", "skills": ["earth_universe"], "minutes": 18, "difficulty": 0.6, "standards": ["5-ESS1-2"] }
         ]
       }
     },
@@ -153,18 +592,168 @@
     }
   },
   "social-studies": {
+    "K": {
+      "community": {
+        "title": "My Community",
+        "lessons": [
+          { "id": "ss-k-community-1", "title": "Community helpers", "skills": ["community_helpers"], "minutes": 10, "difficulty": -0.3, "standards": ["D2.Civ.7.K-2"] },
+          { "id": "ss-k-community-2", "title": "Rules and laws", "skills": ["rules_laws"], "minutes": 8, "difficulty": -0.2, "standards": ["D2.Civ.1.K-2"] }
+        ]
+      },
+      "geography": {
+        "title": "Maps & Geography",
+        "lessons": [
+          { "id": "ss-k-geo-1", "title": "Maps and globes", "skills": ["maps_globes"], "minutes": 10, "difficulty": -0.1, "standards": ["D2.Geo.1.K-2"] },
+          { "id": "ss-k-geo-2", "title": "Land and water", "skills": ["land_water_features"], "minutes": 8, "difficulty": -0.2, "standards": ["D2.Geo.2.K-2"] }
+        ]
+      }
+    },
+    "1": {
+      "family": {
+        "title": "Families & Communities",
+        "lessons": [
+          { "id": "ss-1-family-1", "title": "Family traditions", "skills": ["family_traditions"], "minutes": 12, "difficulty": 0.1, "standards": ["D2.Civ.8.K-2"] },
+          { "id": "ss-1-family-2", "title": "How families change", "skills": ["family_changes"], "minutes": 10, "difficulty": 0.2, "standards": ["D2.His.1.K-2"] }
+        ]
+      },
+      "citizenship": {
+        "title": "Good Citizenship",
+        "lessons": [
+          { "id": "ss-1-citizen-1", "title": "Being a good citizen", "skills": ["good_citizenship"], "minutes": 10, "difficulty": 0.1, "standards": ["D2.Civ.1.K-2"] },
+          { "id": "ss-1-citizen-2", "title": "Solving problems together", "skills": ["solving_problems"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.9.K-2"] }
+        ]
+      },
+      "economics": {
+        "title": "Needs & Wants",
+        "lessons": [
+          { "id": "ss-1-econ-1", "title": "Needs vs wants", "skills": ["needs_wants"], "minutes": 10, "difficulty": 0.1, "standards": ["D2.Eco.1.K-2"] },
+          { "id": "ss-1-econ-2", "title": "Jobs people do", "skills": ["jobs_people"], "minutes": 12, "difficulty": 0.2, "standards": ["D2.Eco.3.K-2"] }
+        ]
+      }
+    },
+    "2": {
+      "communities": {
+        "title": "Communities Past & Present",
+        "lessons": [
+          { "id": "ss-2-comm-1", "title": "Urban, suburban, rural", "skills": ["community_types"], "minutes": 12, "difficulty": 0.2, "standards": ["D2.Geo.3.K-2"] },
+          { "id": "ss-2-comm-2", "title": "How communities change", "skills": ["community_changes"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.His.2.K-2"] }
+        ]
+      },
+      "government": {
+        "title": "Local Government",
+        "lessons": [
+          { "id": "ss-2-gov-1", "title": "Local leaders", "skills": ["local_leaders"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.2.K-2"] },
+          { "id": "ss-2-gov-2", "title": "Making decisions", "skills": ["decision_making"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Civ.9.K-2"] }
+        ]
+      },
+      "culture": {
+        "title": "Culture & Diversity",
+        "lessons": [
+          { "id": "ss-2-culture-1", "title": "Cultural traditions", "skills": ["cultural_traditions"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.8.K-2"] },
+          { "id": "ss-2-culture-2", "title": "Celebrating differences", "skills": ["celebrating_differences"], "minutes": 10, "difficulty": 0.2, "standards": ["D2.Civ.4.K-2"] }
+        ]
+      }
+    },
+    "3": {
+      "geography": {
+        "title": "Geography Skills",
+        "lessons": [
+          { "id": "ss-3-geo-1", "title": "Using maps and globes", "skills": ["map_globe_skills"], "minutes": 15, "difficulty": 0.3, "standards": ["D2.Geo.1.3-5"] },
+          { "id": "ss-3-geo-2", "title": "Physical features", "skills": ["physical_features"], "minutes": 12, "difficulty": 0.2, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-3-geo-3", "title": "Human features", "skills": ["human_features"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.3.3-5"] }
+        ]
+      },
+      "government": {
+        "title": "Local & State Government",
+        "lessons": [
+          { "id": "ss-3-gov-1", "title": "Levels of government", "skills": ["government_levels"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Civ.1.3-5"] },
+          { "id": "ss-3-gov-2", "title": "Rights and responsibilities", "skills": ["rights_responsibilities"], "minutes": 18, "difficulty": 0.5, "standards": ["D2.Civ.2.3-5"] }
+        ]
+      },
+      "economics": {
+        "title": "Economics",
+        "lessons": [
+          { "id": "ss-3-econ-1", "title": "Producers and consumers", "skills": ["producers_consumers"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Eco.1.3-5"] },
+          { "id": "ss-3-econ-2", "title": "Trade and markets", "skills": ["trade_markets"], "minutes": 15, "difficulty": 0.5, "standards": ["D2.Eco.2.3-5"] }
+        ]
+      },
+      "history": {
+        "title": "Local History",
+        "lessons": [
+          { "id": "ss-3-hist-1", "title": "Our community's past", "skills": ["community_history"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.His.1.3-5"] },
+          { "id": "ss-3-hist-2", "title": "Famous people in history", "skills": ["famous_people"], "minutes": 18, "difficulty": 0.5, "standards": ["D2.His.2.3-5"] }
+        ]
+      }
+    },
+    "4": {
+      "state-history": {
+        "title": "State History & Geography",
+        "lessons": [
+          { "id": "ss-4-state-1", "title": "Our state's geography", "skills": ["state_geography"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.1.3-5"] },
+          { "id": "ss-4-state-2", "title": "Early people of our state", "skills": ["early_people"], "minutes": 18, "difficulty": 0.5, "standards": ["D2.His.1.3-5"] },
+          { "id": "ss-4-state-3", "title": "European exploration", "skills": ["european_exploration"], "minutes": 20, "difficulty": 0.6, "standards": ["D2.His.2.3-5"] },
+          { "id": "ss-4-state-4", "title": "Settlement and growth", "skills": ["settlement_growth"], "minutes": 22, "difficulty": 0.7, "standards": ["D2.His.3.3-5"] }
+        ]
+      },
+      "regions": {
+        "title": "U.S. Regions",
+        "lessons": [
+          { "id": "ss-4-regions-1", "title": "Northeast region", "skills": ["northeast_region"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-4-regions-2", "title": "Southeast region", "skills": ["southeast_region"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-4-regions-3", "title": "Midwest region", "skills": ["midwest_region"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-4-regions-4", "title": "Southwest region", "skills": ["southwest_region"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-4-regions-5", "title": "West region", "skills": ["west_region"], "minutes": 15, "difficulty": 0.4, "standards": ["D2.Geo.2.3-5"] }
+        ]
+      },
+      "economics": {
+        "title": "Economic Systems",
+        "lessons": [
+          { "id": "ss-4-econ-1", "title": "Supply and demand", "skills": ["supply_demand"], "minutes": 18, "difficulty": 0.6, "standards": ["D2.Eco.2.3-5"] },
+          { "id": "ss-4-econ-2", "title": "Economic interdependence", "skills": ["economic_interdependence"], "minutes": 20, "difficulty": 0.7, "standards": ["D2.Eco.3.3-5"] }
+        ]
+      }
+    },
     "5": {
       "us-regions": {
         "title": "U.S. Regions",
         "lessons": [
           { "id": "ss-5-regions-1", "title": "Regions overview", "skills": ["us_regions_overview"], "minutes": 12, "difficulty": 0.0, "standards": ["D2.Geo.2.3-5"] },
-          { "id": "ss-5-regions-2", "title": "The Rocky Mountains", "skills": ["us_regions_rockies"], "minutes": 10, "difficulty": 0.2, "standards": ["D2.Geo.1.3-5"] }
+          { "id": "ss-5-regions-2", "title": "The Rocky Mountains", "skills": ["us_regions_rockies"], "minutes": 10, "difficulty": 0.2, "standards": ["D2.Geo.1.3-5"] },
+          { "id": "ss-5-regions-3", "title": "Great Plains", "skills": ["great_plains"], "minutes": 15, "difficulty": 0.3, "standards": ["D2.Geo.2.3-5"] },
+          { "id": "ss-5-regions-4", "title": "Atlantic Coastal Plain", "skills": ["atlantic_coastal"], "minutes": 15, "difficulty": 0.3, "standards": ["D2.Geo.2.3-5"] }
+        ]
+      },
+      "early-america": {
+        "title": "Early American History",
+        "lessons": [
+          { "id": "ss-5-early-1", "title": "Native American cultures", "skills": ["native_american_cultures"], "minutes": 18, "difficulty": 0.5, "standards": ["D2.His.1.3-5"] },
+          { "id": "ss-5-early-2", "title": "European exploration", "skills": ["european_exploration_5"], "minutes": 20, "difficulty": 0.6, "standards": ["D2.His.2.3-5"] },
+          { "id": "ss-5-early-3", "title": "13 colonies", "skills": ["thirteen_colonies"], "minutes": 22, "difficulty": 0.7, "standards": ["D2.His.2.3-5"] },
+          { "id": "ss-5-early-4", "title": "Road to revolution", "skills": ["road_revolution"], "minutes": 25, "difficulty": 0.8, "standards": ["D2.His.3.3-5"] }
+        ]
+      },
+      "founding": {
+        "title": "Founding the Nation",
+        "lessons": [
+          { "id": "ss-5-found-1", "title": "Declaration of Independence", "skills": ["declaration_independence"], "minutes": 20, "difficulty": 0.7, "standards": ["D2.His.3.3-5"] },
+          { "id": "ss-5-found-2", "title": "Revolutionary War", "skills": ["revolutionary_war"], "minutes": 22, "difficulty": 0.8, "standards": ["D2.His.3.3-5"] },
+          { "id": "ss-5-found-3", "title": "Constitution", "skills": ["constitution"], "minutes": 25, "difficulty": 0.8, "standards": ["D2.Civ.3.3-5"] }
         ]
       },
       "civics": {
         "title": "Civics",
         "lessons": [
-          { "id": "ss-5-civics-1", "title": "Branches of government", "skills": ["branches_gov"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.1.3-5"] }
+          { "id": "ss-5-civics-1", "title": "Branches of government", "skills": ["branches_gov"], "minutes": 12, "difficulty": 0.3, "standards": ["D2.Civ.1.3-5"] },
+          { "id": "ss-5-civics-2", "title": "Bill of Rights", "skills": ["bill_of_rights"], "minutes": 18, "difficulty": 0.6, "standards": ["D2.Civ.3.3-5"] },
+          { "id": "ss-5-civics-3", "title": "Citizenship responsibilities", "skills": ["citizenship_responsibilities"], "minutes": 15, "difficulty": 0.5, "standards": ["D2.Civ.7.3-5"] }
+        ]
+      },
+      "westward": {
+        "title": "Westward Expansion",
+        "lessons": [
+          { "id": "ss-5-west-1", "title": "Louisiana Purchase", "skills": ["louisiana_purchase"], "minutes": 18, "difficulty": 0.6, "standards": ["D2.His.3.3-5"] },
+          { "id": "ss-5-west-2", "title": "Oregon Trail", "skills": ["oregon_trail"], "minutes": 20, "difficulty": 0.7, "standards": ["D2.His.3.3-5"] },
+          { "id": "ss-5-west-3", "title": "California Gold Rush", "skills": ["gold_rush"], "minutes": 18, "difficulty": 0.6, "standards": ["D2.His.3.3-5"] }
         ]
       }
     },
