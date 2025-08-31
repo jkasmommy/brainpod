@@ -7,18 +7,26 @@ interface BreathingCircleProps {
   onSkip?: () => void;
   duration?: number; // Total duration in seconds
   className?: string;
+  breathingPattern?: {
+    inhale: number;
+    hold: number;
+    exhale: number;
+    pause: number;
+  };
 }
 
 export default function BreathingCircle({ 
   onComplete, 
   onSkip,
   duration = 20, 
-  className = '' 
+  className = '',
+  breathingPattern = { inhale: 4, hold: 2, exhale: 4, pause: 1 }
 }: BreathingCircleProps) {
-  const [phase, setPhase] = useState<'inhale' | 'hold' | 'exhale'>('inhale');
+  const [phase, setPhase] = useState<'inhale' | 'hold' | 'exhale' | 'pause'>('inhale');
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isActive, setIsActive] = useState(true);
   const [hasCompleted, setHasCompleted] = useState(false);
+  const [cycleTimer, setCycleTimer] = useState(0);
 
   // Reset timeLeft if duration changes (component remount)
   useEffect(() => {
@@ -47,15 +55,23 @@ export default function BreathingCircle({
           return 0;
         }
         
-        // Cycle through breathing phases (4 seconds inhale, 2 seconds hold, 4 seconds exhale)
-        const cycleTime = newTime % 10;
-        if (cycleTime >= 6) {
-          setPhase('inhale');
-        } else if (cycleTime >= 4) {
-          setPhase('hold');
-        } else {
-          setPhase('exhale');
-        }
+        // Cycle through breathing phases using the provided pattern
+        setCycleTimer(prev => {
+          const totalCycleTime = breathingPattern.inhale + breathingPattern.hold + breathingPattern.exhale + breathingPattern.pause;
+          const currentCycleTime = (prev + 1) % totalCycleTime;
+          
+          if (currentCycleTime < breathingPattern.inhale) {
+            setPhase('inhale');
+          } else if (currentCycleTime < breathingPattern.inhale + breathingPattern.hold) {
+            setPhase('hold');
+          } else if (currentCycleTime < breathingPattern.inhale + breathingPattern.hold + breathingPattern.exhale) {
+            setPhase('exhale');
+          } else {
+            setPhase('pause');
+          }
+          
+          return currentCycleTime;
+        });
         
         return newTime;
       });
@@ -69,6 +85,7 @@ export default function BreathingCircle({
       case 'inhale': return 'Breathe In...';
       case 'hold': return 'Hold...';
       case 'exhale': return 'Breathe Out...';
+      case 'pause': return 'Pause...';
     }
   };
 

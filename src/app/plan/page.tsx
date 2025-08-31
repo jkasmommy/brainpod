@@ -1,6 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
+import { SubjectKey, getLevel } from '@/lib/levels';
+import { renderStandards } from '@/lib/standards';
 import { Calendar, BookOpen, Clock, Target, Zap, RefreshCw } from 'lucide-react';
 
 interface PlanItem {
@@ -16,23 +20,46 @@ interface PlanItem {
 }
 
 const subjects = [
-  { id: 'math', name: 'Mathematics', icon: '🔢', color: 'from-blue-500 to-purple-600' },
-  { id: 'reading', name: 'Reading', icon: '📚', color: 'from-green-500 to-teal-600' },
-  { id: 'science', name: 'Science', icon: '🔬', color: 'from-purple-500 to-pink-600' },
-  { id: 'social-studies', name: 'Social Studies', icon: '🌍', color: 'from-orange-500 to-red-600' }
+  { id: 'math' as SubjectKey, name: 'Mathematics', icon: '🔢', color: 'from-blue-500 to-purple-600' },
+  { id: 'reading' as SubjectKey, name: 'Reading', icon: '📚', color: 'from-green-500 to-teal-600' },
+  { id: 'science' as SubjectKey, name: 'Science', icon: '🔬', color: 'from-purple-500 to-pink-600' },
+  { id: 'social-studies' as SubjectKey, name: 'Social Studies', icon: '🌍', color: 'from-orange-500 to-red-600' }
 ];
 
 export default function PlanPage() {
-  const [selectedSubject, setSelectedSubject] = useState<string>('math');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [selectedSubject, setSelectedSubject] = useState<SubjectKey>('math');
   const [todaysPlaylist, setTodaysPlaylist] = useState<PlanItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string>('');
 
+  // Check authentication first
+  useEffect(() => {
+    const currentUser = requireAuth(router);
+    if (currentUser) {
+      setUser(currentUser);
+      setAuthLoading(false);
+    }
+  }, [router]);
+
+  // Set subject from URL params
+  useEffect(() => {
+    const subjectParam = searchParams.get('subject') as SubjectKey;
+    if (subjectParam && subjects.some(s => s.id === subjectParam)) {
+      setSelectedSubject(subjectParam);
+    }
+  }, [searchParams]);
+
   // Load today's playlist on component mount
   useEffect(() => {
-    loadTodaysPlaylist();
-  }, []);
+    if (!authLoading && user) {
+      loadTodaysPlaylist();
+    }
+  }, [authLoading, user, selectedSubject]);
 
   /**
    * Generate a new personalized learning plan for selected subject
@@ -42,19 +69,28 @@ export default function PlanPage() {
     setError('');
 
     try {
-      // Get placement data from localStorage (from diagnostic results)
-      const placementKey = `bp_place_${selectedSubject}`;
-      const savedPlacement = localStorage.getItem(placementKey);
+      // Check if subject has a level record
+      const level = getLevel(selectedSubject);
       
+      if (!level) {
+        setError(`Please complete the ${subjects.find(s => s.id === selectedSubject)?.name} diagnostic first to generate a personalized plan.`);
+        setGenerating(false);
+        return;
+      }
+
+      // Use level data for plan generation
       const headers: any = {
         'Content-Type': 'application/json'
       };
 
-      // Add placement data to headers if available
-      if (savedPlacement) {
-        const placementData = JSON.parse(savedPlacement);
-        headers['x-placement-data'] = JSON.stringify(placementData.placement);
-      }
+      // Add placement data from level record
+      headers['x-placement-data'] = JSON.stringify({
+        subject: selectedSubject,
+        ability: level.ability,
+        label: level.levelLabel,
+        recommendedGrade: level.grade,
+        recommendedUnit: level.unit
+      });
 
       const response = await fetch('/api/plan/generate', {
         method: 'POST',
@@ -84,53 +120,32 @@ export default function PlanPage() {
   };
 
   /**
-   * Load today's playlist from all subjects
+   * Load today's playlist - can be filtered by subject or show all
    */
   const loadTodaysPlaylist = async () => {
     setLoading(true);
     setError('');
 
     try {
-      // Collect plan items from all subjects
-      const allPlanItems: PlanItem[] = [];
-      
-      for (const subject of subjects) {
-        const planKey = `bp_plan_${subject.id}`;
-        const savedPlan = localStorage.getItem(planKey);
-        
-        if (savedPlan) {
-          const planItems: PlanItem[] = JSON.parse(savedPlan);
-          allPlanItems.push(...planItems);
-        }
-      }
-
-      if (allPlanItems.length === 0) {
-        setTodaysPlaylist([]);
-        return;
-      }
-
-      // Get mastery data if available
-      const masteryData = localStorage.getItem('bp_mastery') || '{}';
-
-      const headers = {
-        'x-plan-data': JSON.stringify(allPlanItems),
-        'x-mastery-data': masteryData
-      };
-
-      const response = await fetch('/api/plan/today', {
-        headers
-      });
+      // Try to get today's playlist for the selected subject
+      const response = await fetch(`/api/plan/today?subject=${selectedSubject}`);
 
       if (!response.ok) {
+        // If no plan exists for this subject, show empty state
+        if (response.status === 404) {
+          setTodaysPlaylist([]);
+          return;
+        }
         throw new Error('Failed to load today\'s playlist');
       }
 
       const data = await response.json();
-      setTodaysPlaylist(data.playlist);
+      setTodaysPlaylist(data.playlist || []);
 
     } catch (err) {
       console.error('Error loading playlist:', err);
       setError('Failed to load today\'s playlist.');
+      setTodaysPlaylist([]);
     } finally {
       setLoading(false);
     }
@@ -165,6 +180,18 @@ export default function PlanPage() {
     if (difficulty <= 0.5) return 'Hard';
     return 'Challenge';
   };
+
+  // Authentication loading state
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading your learning plan...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">
@@ -206,23 +233,50 @@ export default function PlanPage() {
 
             {/* Generate Plan Button */}
             <div className="text-center">
-              <button
-                onClick={generatePlan}
-                disabled={generating}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {generating ? (
-                  <>
-                    <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
-                    Generating Plan...
-                  </>
-                ) : (
-                  <>
-                    <Target className="w-5 h-5 mr-2" />
-                    Generate {subjects.find(s => s.id === selectedSubject)?.name} Plan
-                  </>
-                )}
-              </button>
+              {(() => {
+                const level = getLevel(selectedSubject);
+                const selectedSubjectInfo = subjects.find(s => s.id === selectedSubject);
+                
+                if (!level) {
+                  return (
+                    <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-6 mb-6">
+                      <h3 className="text-lg font-medium text-yellow-800 dark:text-yellow-200 mb-2">
+                        Diagnostic Required
+                      </h3>
+                      <p className="text-yellow-700 dark:text-yellow-300 mb-4">
+                        Complete the {selectedSubjectInfo?.name} diagnostic to generate a personalized learning plan.
+                      </p>
+                      <a
+                        href={`/diagnostic/${selectedSubject}`}
+                        className="inline-flex items-center px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 transition-colors"
+                      >
+                        <Target className="w-5 h-5 mr-2" />
+                        Take {selectedSubjectInfo?.name} Diagnostic
+                      </a>
+                    </div>
+                  );
+                }
+                
+                return (
+                  <button
+                    onClick={generatePlan}
+                    disabled={generating}
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {generating ? (
+                      <>
+                        <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
+                        Generating Plan...
+                      </>
+                    ) : (
+                      <>
+                        <Target className="w-5 h-5 mr-2" />
+                        Generate {selectedSubjectInfo?.name} Plan
+                      </>
+                    )}
+                  </button>
+                );
+              })()}
             </div>
           </div>
 
@@ -307,15 +361,10 @@ export default function PlanPage() {
                         </div>
 
                         {item.standards && item.standards.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mb-3">
-                            {item.standards.map((standard) => (
-                              <span
-                                key={standard}
-                                className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800"
-                              >
-                                {standard}
-                              </span>
-                            ))}
+                          <div className="mb-3">
+                            <p className="text-xs text-gray-600 dark:text-gray-400">
+                              <strong>Standards:</strong> {renderStandards(item.standards)}
+                            </p>
                           </div>
                         )}
                       </div>

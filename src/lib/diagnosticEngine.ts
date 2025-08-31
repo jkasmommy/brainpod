@@ -6,7 +6,8 @@
  * when to stop testing based on measurement precision.
  */
 
-import { DiagItem, DiagBlueprint, DiagState, Placement, Subject } from './diagTypes';
+import { DiagItem, DiagState, DiagBlueprint, Subject } from './diagTypes';
+import { GRADE_LEVELS, getPersonalizedCurriculum, StudentProgress } from './curriculum';
 
 /**
  * Load diagnostic item bank for a subject
@@ -182,55 +183,75 @@ export function shouldStop(
   return longWrongStreak || (veryLongStreak && state.skillsSeen.size >= blueprint.stopRules.minSkills);
 }
 
+export interface Placement {
+  ability: number;
+  recommendedGrade: string;
+  recommendedUnit: string;
+  confidenceLevel: number;
+  skillGaps: string[];
+  accelerationOpportunities: string[];
+  adaptiveModifications: any;
+}
+
 /**
- * Convert final ability estimate to grade placement recommendation
- * Enhanced scale covering K through college level
+ * Place student in appropriate curriculum level based on ability
  */
 export function place(ability: number, subject: Subject): Placement {
-  // Calculate standard error (simplified - would use more sophisticated model in production)
-  const sem = 0.25; // Reduced SEM for more confidence
+  // Determine grade level based on ability
+  let recommendedGrade = 'K';
+  let confidenceLevel = 0.8;
   
-  let recommendedGrade: string;
-  let recommendedUnit: string | undefined;
-  
-  // Expanded ability scale covering K through college
-  if (ability <= -2.5) {
-    recommendedGrade = "Pre-K/K Foundation";
-    recommendedUnit = getFoundationUnit(subject);
-  } else if (ability <= -1.5) {
-    recommendedGrade = "Kindergarten - Grade 1";
-    recommendedUnit = getRemediationUnit(subject);
-  } else if (ability <= -0.8) {
-    recommendedGrade = "Grade 1-2 Level";
-    recommendedUnit = getGradeUnit(subject, -1);
-  } else if (ability <= -0.2) {
-    recommendedGrade = "Grade 2-3 Level";
-    recommendedUnit = getGradeUnit(subject, 0);
-  } else if (ability <= 0.3) {
-    recommendedGrade = "Grade 3-4 Level";
-    recommendedUnit = getGradeUnit(subject, 1);
-  } else if (ability <= 0.8) {
-    recommendedGrade = "Grade 4-5 Level";
-    recommendedUnit = getGradeUnit(subject, 2);
-  } else if (ability <= 1.3) {
-    recommendedGrade = "Grade 5-6 Level";
-    recommendedUnit = getMiddleSchoolUnit(subject);
-  } else if (ability <= 1.8) {
-    recommendedGrade = "Middle School (6-8)";
-    recommendedUnit = getAdvancedUnit(subject);
-  } else if (ability <= 2.3) {
-    recommendedGrade = "High School (9-12)";
-    recommendedUnit = getHighSchoolUnit(subject);
+  // Enhanced placement logic based on ability thresholds
+  if (ability >= 2.0) {
+    recommendedGrade = '5'; // High school ready
+    confidenceLevel = 0.95;
+  } else if (ability >= 1.5) {
+    recommendedGrade = '4'; // Upper elementary
+    confidenceLevel = 0.9;
+  } else if (ability >= 1.0) {
+    recommendedGrade = '3'; // Middle elementary
+    confidenceLevel = 0.85;
+  } else if (ability >= 0.5) {
+    recommendedGrade = '2'; // Early elementary
+    confidenceLevel = 0.8;
+  } else if (ability >= 0.0) {
+    recommendedGrade = '1'; // First grade
+    confidenceLevel = 0.75;
   } else {
-    recommendedGrade = "College/Advanced Level";
-    recommendedUnit = getCollegeUnit(subject);
+    recommendedGrade = 'K'; // Kindergarten
+    confidenceLevel = 0.7;
   }
+  
+  // Get curriculum-based placement
+  const mockProgress: StudentProgress = {
+    studentId: 'current',
+    subject,
+    currentGrade: recommendedGrade,
+    currentUnit: '',
+    currentLesson: '',
+    masteredSkills: [],
+    skillLevels: {},
+    adaptiveLevel: ability,
+    lastAssessment: new Date(),
+    recommendedPath: [],
+    strugglingAreas: [],
+    acceleratedAreas: []
+  };
+  
+  const personalizedCurriculum = getPersonalizedCurriculum(
+    subject,
+    { ability, recommendedGrade },
+    mockProgress
+  );
   
   return {
     ability,
-    sem,
-    recommendedGrade,
-    recommendedUnit
+    recommendedGrade: personalizedCurriculum.recommendedGrade,
+    recommendedUnit: personalizedCurriculum.recommendedUnit,
+    confidenceLevel,
+    skillGaps: personalizedCurriculum.skillGaps,
+    accelerationOpportunities: personalizedCurriculum.accelerationOpportunities,
+    adaptiveModifications: personalizedCurriculum.adaptiveModifications
   };
 }
 

@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Subject } from '../../../../lib/diagTypes';
-import { BookOpen, Calculator, Microscope, Globe, TrendingUp, Star, RefreshCw } from 'lucide-react';
+import { SubjectKey, upsertLevelFromPlacement } from '@/lib/levels';
+import { BookOpen, Calculator, Microscope, Globe, TrendingUp, Star, RefreshCw, Target, Home, GraduationCap } from 'lucide-react';
 
 const subjectConfig = {
   math: {
@@ -46,6 +47,8 @@ export default function DiagnosticResults() {
     correct: 0,
     total: 0
   });
+  const [levelCreated, setLevelCreated] = useState(false);
+  const [planGenerated, setPlanGenerated] = useState(false);
 
   useEffect(() => {
     // Get results from URL params
@@ -56,7 +59,63 @@ export default function DiagnosticResults() {
     const total = parseInt(searchParams.get('total') || '0');
 
     setResults({ ability, grade, unit, correct, total });
-  }, [searchParams]);
+
+    // Create level record from diagnostic results
+    if (ability !== 0 && grade && subject) {
+      createLevelRecord(ability, grade, unit);
+    }
+  }, [searchParams, subject]);
+
+  /**
+   * Create level record from diagnostic placement data
+   */
+  const createLevelRecord = async (ability: number, grade: string, unit: string) => {
+    try {
+      // Create level record using upsertLevelFromPlacement
+      const levelRecord = upsertLevelFromPlacement({
+        subject: subject as SubjectKey,
+        ability,
+        label: getAbilityDisplay(ability).label,
+        recommendedGrade: grade,
+        recommendedUnit: unit,
+        sem: 0.3 // Standard error of measurement for demo
+      });
+
+      setLevelCreated(true);
+
+      // Generate learning plan if this subject doesn't have one yet
+      const planKey = `bp_plan_${subject}`;
+      const existingPlan = localStorage.getItem(planKey);
+      
+      if (!existingPlan) {
+        await generateLearningPlan();
+      }
+      
+    } catch (error) {
+      console.error('Error creating level record:', error);
+    }
+  };
+
+  /**
+   * Generate learning plan for this subject
+   */
+  const generateLearningPlan = async () => {
+    try {
+      const response = await fetch('/api/plan/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ subject })
+      });
+
+      if (response.ok) {
+        setPlanGenerated(true);
+      }
+    } catch (error) {
+      console.error('Error generating learning plan:', error);
+    }
+  };
 
   const config = subjectConfig[subject];
   const IconComponent = config?.icon || Calculator;
@@ -160,6 +219,22 @@ export default function DiagnosticResults() {
               You&apos;ve completed your {config.name} diagnostic
             </p>
             
+            {/* High School Course Banner */}
+            {results.grade === 'HS' && (
+              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white mb-8 max-w-2xl mx-auto">
+                <div className="flex items-center justify-center mb-3">
+                  <GraduationCap className="w-8 h-8 mr-3" />
+                  <h2 className="text-2xl font-bold">High School Ready!</h2>
+                </div>
+                <p className="text-blue-100">
+                  {results.unit && results.unit.includes('Recommended Course') 
+                    ? `We recommend starting with our ${results.unit.replace('-', ' ')} course`
+                    : `You're ready for high school level ${config.name} content`
+                  }
+                </p>
+              </div>
+            )}
+            
             <p className="text-gray-600 dark:text-gray-400">
               Here&apos;s what we discovered about your learning level
             </p>
@@ -236,24 +311,50 @@ export default function DiagnosticResults() {
                 </p>
               </div>
 
-              <Link
-                href={getLearningPath()}
-                className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${config.color} text-white font-semibold rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500`}
-              >
-                Start Learning Journey →
-              </Link>
+              {/* Status Messages */}
+              {levelCreated && (
+                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
+                  <p className="text-green-800 dark:text-green-200 text-sm">
+                    ✅ Your learning level has been saved and personalized content is ready!
+                  </p>
+                </div>
+              )}
+              
+              {planGenerated && (
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-6">
+                  <p className="text-blue-800 dark:text-blue-200 text-sm">
+                    🎯 Your personalized learning plan has been generated!
+                  </p>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="/plan"
+                  className={`inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${config.color} text-white font-semibold rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500`}
+                >
+                  <Target className="mr-2" size={18} />
+                  Start My Learning Plan
+                </Link>
+                
+                <Link
+                  href={getLearningPath()}
+                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500"
+                >
+                  Browse {config.name} Lessons
+                </Link>
+              </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-                    {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              href="/plan"
-              className="flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+              href="/dashboard"
+              className="flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
             >
-              <Star className="mr-2" size={18} />
-              Start My Plan
+              <Home className="mr-2" size={18} />
+              Back to Dashboard
             </Link>
             
             <button

@@ -1,3 +1,8 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import Link from 'next/link';
 import { Book, ArrowLeft, Clock, Target } from 'lucide-react';
 
@@ -11,6 +16,29 @@ const readingUnits = [
 ];
 
 export default function ReadingLearning() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    const currentUser = requireAuth(router);
+    if (currentUser) {
+      setUser(currentUser);
+      setAuthLoading(false);
+    }
+  }, [router]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading reading learning...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
       <div className="container mx-auto px-6 py-16">

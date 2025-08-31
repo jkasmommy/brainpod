@@ -1,23 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { buildDailyPlaylist } from '../../../../lib/schedule';
 import { PlanItem } from '../../../../lib/types';
+import { SubjectKey } from '../../../../lib/levels';
 
 export async function GET(request: NextRequest) {
   try {
-    // In production, read from database
-    // For now, expect plan items to be passed via headers or query params
+    const { searchParams } = new URL(request.url);
+    const subject = searchParams.get('subject') as SubjectKey | null;
+    
+    // In production, read from database based on user session
+    // For now, simulate reading from localStorage via headers or return mock data
     const planDataHeader = request.headers.get('x-plan-data');
     const masteryDataHeader = request.headers.get('x-mastery-data');
 
-    if (!planDataHeader) {
-      return NextResponse.json(
-        { error: 'No plan data found. Generate a plan first.' }, 
-        { status: 404 }
-      );
+    let planItems: PlanItem[] = [];
+    let mastery = {};
+
+    if (planDataHeader) {
+      planItems = JSON.parse(planDataHeader);
+      mastery = masteryDataHeader ? JSON.parse(masteryDataHeader) : {};
+    } else {
+      // If no plan data provided, create some mock items for demo
+      if (subject) {
+        planItems = generateMockPlanItems(subject);
+      } else {
+        // Return empty playlist
+        return NextResponse.json({
+          playlist: [],
+          total_items: 0,
+          today: new Date().toISOString().split('T')[0],
+          message: 'No learning plan found. Generate a plan to get started.'
+        });
+      }
     }
 
-    const planItems: PlanItem[] = JSON.parse(planDataHeader);
-    const mastery = masteryDataHeader ? JSON.parse(masteryDataHeader) : {};
+    // Filter by subject if specified
+    if (subject) {
+      planItems = planItems.filter(item => 
+        item.lessonId.startsWith(subject) || 
+        item.skills?.some(skill => skill.includes(subject))
+      );
+    }
 
     // Build today's playlist using spaced repetition
     const todaysPlaylist = buildDailyPlaylist(planItems, mastery);
@@ -29,7 +52,8 @@ export async function GET(request: NextRequest) {
       playlist: enrichedPlaylist,
       total_items: todaysPlaylist.length,
       today: new Date().toISOString().split('T')[0],
-      next_review_date: calculateNextReviewDate(planItems)
+      next_review_date: calculateNextReviewDate(planItems),
+      subject: subject || 'all'
     };
 
     return NextResponse.json(response);
@@ -41,6 +65,79 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+/**
+ * Generate mock plan items for demo purposes
+ */
+function generateMockPlanItems(subject: SubjectKey): PlanItem[] {
+  const baseItems = {
+    math: [
+      {
+        lessonId: 'math-1-counting-1',
+        skills: ['number-recognition', 'counting'],
+        scheduled_for: new Date().toISOString(),
+        status: 'todo' as const,
+        priority: 100,
+        title: 'Number Recognition 1-10',
+        minutes: 15,
+        standards: ['K.CC.A.1'],
+        difficulty: 0
+      },
+      {
+        lessonId: 'math-1-counting-2', 
+        skills: ['counting-sequence'],
+        scheduled_for: new Date(Date.now() + 86400000).toISOString(),
+        status: 'locked' as const,
+        priority: 90,
+        title: 'Counting Forward from Any Number',
+        minutes: 15,
+        standards: ['K.CC.A.2'],
+        difficulty: 0.1
+      }
+    ],
+    reading: [
+      {
+        lessonId: 'reading-1-phonics-1',
+        skills: ['letter-sounds', 'phonics'],
+        scheduled_for: new Date().toISOString(),
+        status: 'todo' as const,
+        priority: 100,
+        title: 'Letter Sounds A-E',
+        minutes: 20,
+        standards: ['K.RF.3'],
+        difficulty: 0
+      }
+    ],
+    science: [
+      {
+        lessonId: 'science-1-living-1',
+        skills: ['living-nonliving'],
+        scheduled_for: new Date().toISOString(),
+        status: 'todo' as const,
+        priority: 100,
+        title: 'Living vs Non-Living Things',
+        minutes: 15,
+        standards: ['K-LS1-1'],
+        difficulty: 0
+      }
+    ],
+    'social-studies': [
+      {
+        lessonId: 'social-studies-1-community-1',
+        skills: ['community-helpers'],
+        scheduled_for: new Date().toISOString(),
+        status: 'todo' as const,
+        priority: 100,
+        title: 'Community Helpers',
+        minutes: 15,
+        standards: ['K.Civ.1'],
+        difficulty: 0
+      }
+    ]
+  };
+
+  return baseItems[subject] || [];
 }
 
 /**

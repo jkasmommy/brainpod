@@ -72,6 +72,12 @@ export default function Header() {
               Assessment
             </Link>
             <Link 
+              href="/pricing" 
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              Pricing
+            </Link>
+            <Link 
               href="/about" 
               className="text-gray-600 hover:text-blue-600 transition-colors"
             >
@@ -198,6 +204,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Assessment
+              </Link>
+              <Link 
+                href="/pricing" 
+                className="block px-3 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Pricing
               </Link>
               <Link 
                 href="/about" 

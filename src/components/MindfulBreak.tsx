@@ -10,9 +10,11 @@ interface MindfulBreakProps {
   message?: string;
   duration?: number;
   isOpen: boolean;
+  grade?: string; // Add grade prop for age-appropriate content
 }
 
-const affirmations = [
+// Age-appropriate affirmations
+const youngAffirmations = [
   "You are doing great! 🌟",
   "Take your time and breathe. 🌸", 
   "Every step forward is progress. 💪",
@@ -22,17 +24,50 @@ const affirmations = [
   "Take a moment to appreciate how far you've come. 🌱"
 ];
 
+const teenAffirmations = [
+  "You're making solid progress! 💪",
+  "Take a breath. You've got this handled. 🌟",
+  "Growth happens when you push through challenges. 🚀",
+  "Your effort today shapes your future success. ⭐",
+  "Smart work beats hard work. You're doing both. 🧠",
+  "Every expert was once a beginner. Keep building. 🏗️",
+  "Focus on progress, not perfection. 📈"
+];
+
+// Mindful break types
+const breakTypes = {
+  young: {
+    title: "Time for a Mindful Break! 🧘‍♀️",
+    message: "Let's take a moment to breathe and reset your learning energy.",
+    breathingPattern: { inhale: 4, hold: 4, exhale: 4, pause: 1 } // 4-4-4-1 pattern
+  },
+  teen: {
+    title: "Quick Reset Break 🧘",
+    message: "Take a moment to center yourself and refocus your energy.",
+    breathingPattern: { inhale: 4, hold: 4, exhale: 4, pause: 4 } // Box breathing 4-4-4-4
+  }
+};
+
 export default function MindfulBreak({ 
   onComplete, 
   onSkip,
-  title = "Time for a Mindful Break! 🧘‍♀️",
-  message = "Let's take a moment to breathe and reset your learning energy.",
+  title,
+  message,
   duration = 20,
-  isOpen 
+  isOpen,
+  grade
 }: MindfulBreakProps) {
   const [currentAffirmation, setCurrentAffirmation] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
   const skipButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Determine age group and get appropriate content
+  const isTeenOrHS = grade === 'HS' || ['9', '10', '11', '12'].includes(grade || '');
+  const breakType = isTeenOrHS ? breakTypes.teen : breakTypes.young;
+  const affirmations = isTeenOrHS ? teenAffirmations : youngAffirmations;
+  
+  const finalTitle = title || breakType.title;
+  const finalMessage = message || breakType.message;
 
   // Focus trap for accessibility
   useEffect(() => {
@@ -88,13 +123,13 @@ export default function MindfulBreak({
             id="mindful-break-title"
             className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2"
           >
-            {title}
+            {finalTitle}
           </h2>
           <p 
             id="mindful-break-description"
             className="text-gray-600 dark:text-gray-300 mb-4"
           >
-            {message}
+            {finalMessage}
           </p>
           
           {/* Affirmation */}
@@ -112,6 +147,7 @@ export default function MindfulBreak({
             duration={duration}
             onComplete={onComplete}
             onSkip={onSkip}
+            breathingPattern={breakType.breathingPattern}
           />
         </div>
 

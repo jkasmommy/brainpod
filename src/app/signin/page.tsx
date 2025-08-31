@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, User, Mail, Lock, AlertCircle, CheckCircle } from 'lucide-react';
-import { getCurrentUser, initializeAuth, createDemoAccount, User } from '@/lib/auth';
+import { getCurrentUser, initializeAuth, createDemoAccount } from '@/lib/auth';
 
 export default function SignIn() {
   const router = useRouter();

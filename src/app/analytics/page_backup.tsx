@@ -257,72 +257,66 @@ export default function AnalyticsPage() {
               </h2>
               
               <div className="space-y-4">
-                {Object.entries(analytics.bySubject).length > 0 ? (
-                  Object.entries(analytics.bySubject).map(([subject, data]: [string, any]) => {
-                    const subjectInfo = subjects.find(s => s.id === subject);
-                    const completionRate = data.completionRate * 100;
-                    const accuracy = data.averageAccuracy * 100;
-                    
-                    return (
-                      <div key={subject} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center">
-                            <span className="text-2xl mr-3">{subjectInfo?.icon}</span>
-                            <div>
-                              <h3 className="font-semibold text-gray-800 dark:text-gray-200">
-                                {subjectInfo?.name}
-                              </h3>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                {data.masteredLessons}/{data.totalLessons} lessons completed
-                              </p>
-                            </div>
-                          </div>
-                          <div className="text-right">
+                {Object.entries(analytics.bySubject).map(([subject, data]: [string, any]) => {
+                  const subjectInfo = subjects.find(s => s.id === subject);
+                  const completionRate = data.completionRate * 100;
+                  const accuracy = data.averageAccuracy * 100;
+                  
+                  return (
+                    <div key={subject} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <span className="text-2xl mr-3">{subjectInfo?.icon}</span>
+                          <div>
+                            <h3 className="font-semibold text-gray-800 dark:text-gray-200">
+                              {subjectInfo?.name}
+                            </h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {formatTime(data.totalTime)}
+                              {data.masteredLessons}/{data.totalLessons} lessons completed
                             </p>
-                            <p className="text-xs text-gray-500">
-                              {data.streak > 0 ? `${data.streak} day streak` : 'No streak'}
-                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            {formatTime(data.totalTime)}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {data.streak > 0 ? `${data.streak} day streak` : 'No streak'}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Progress Bars */}
+                      <div className="space-y-2">
+                        <div>
+                          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
+                            <span>Completion</span>
+                            <span>{Math.round(completionRate)}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full bg-${getSubjectColor(subject)}-500`}
+                              style={{ width: `${completionRate}%` }}
+                            />
                           </div>
                         </div>
                         
-                        {/* Progress Bars */}
-                        <div className="space-y-2">
-                          <div>
-                            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
-                              <span>Completion</span>
-                              <span>{Math.round(completionRate)}%</span>
-                            </div>
-                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                              <div
-                                className={`h-2 rounded-full bg-${getSubjectColor(subject)}-500`}
-                                style={{ width: `${completionRate}%` }}
-                              />
-                            </div>
+                        <div>
+                          <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
+                            <span>Accuracy</span>
+                            <span>{Math.round(accuracy)}%</span>
                           </div>
-                          
-                          <div>
-                            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
-                              <span>Accuracy</span>
-                              <span>{Math.round(accuracy)}%</span>
-                            </div>
-                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                              <div
-                                className={`h-2 rounded-full bg-${getSubjectColor(subject)}-400`}
-                                style={{ width: `${accuracy}%` }}
-                              />
-                            </div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full bg-${getSubjectColor(subject)}-400`}
+                              style={{ width: `${accuracy}%` }}
+                            />
                           </div>
                         </div>
                       </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    No subject data available yet. Start learning to see progress!
-                  </div>
-                )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -383,7 +377,7 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          {/* Learning Insights */}
+          {/* Detailed Metrics */}
           <div className="mt-8 bg-white/80 dark:bg-gray-800/80 rounded-xl p-6 shadow-lg backdrop-blur-sm">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-6 flex items-center">
               <Zap className="w-5 h-5 mr-2" />

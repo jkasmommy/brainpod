@@ -1,3 +1,8 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import Link from 'next/link';
 import { Calculator, ArrowLeft, Clock, Target, Play, CheckCircle } from 'lucide-react';
 

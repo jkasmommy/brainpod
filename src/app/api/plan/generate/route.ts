@@ -2,23 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generatePlan } from '../../../../lib/plan';
 import { Manifest, SkillGraph, Placement } from '../../../../lib/types';
 import { abilityToLabelAndStart } from '../../../../lib/placementMaps';
+import { SubjectKey, getLevel } from '../../../../lib/levels';
 
 export async function POST(request: NextRequest) {
   try {
     const { subject } = await request.json();
 
-    if (!subject || !['math', 'reading', 'science', 'social-studies'].includes(subject)) {
+    if (!subject || !(['math', 'reading', 'science', 'social-studies'] as SubjectKey[]).includes(subject)) {
       return NextResponse.json(
         { error: 'Invalid subject provided' }, 
         { status: 400 }
       );
     }
 
-    // Read placement from localStorage simulation (would be from database in production)
-    // For now, we'll expect the client to send placement data or read from headers
-    const placementHeader = request.headers.get('x-placement-data');
+    // Try to get placement from level record first, then fallback to headers
     let placement: Placement;
-
+    
+    // Check if we have a level record (this would come from the client in a real app)
+    const placementHeader = request.headers.get('x-placement-data');
+    
     if (placementHeader) {
       placement = JSON.parse(placementHeader);
     } else {
@@ -33,11 +35,19 @@ export async function POST(request: NextRequest) {
       };
     }
 
-    // Load manifest and skills data
-    const manifestRes = await fetch(new URL('/content/manifest.json', request.url));
-    const skillsRes = await fetch(new URL('/content/skills.json', request.url));
+    // Load manifest and skills data from public content directory
+    const baseUrl = process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : request.url.replace(/\/api\/.*$/, '');
+      
+    const manifestRes = await fetch(`${baseUrl}/content/manifest.json`);
+    const skillsRes = await fetch(`${baseUrl}/content/skills.json`);
 
     if (!manifestRes.ok || !skillsRes.ok) {
+      console.error('Failed to load curriculum data:', {
+        manifest: manifestRes.status,
+        skills: skillsRes.status
+      });
       return NextResponse.json(
         { error: 'Failed to load curriculum data' }, 
         { status: 500 }

@@ -1,3 +1,8 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import Link from 'next/link';
 import { Calculator, ArrowLeft, Star, Clock, Target } from 'lucide-react';
 
@@ -15,6 +20,29 @@ const mathUnits = [
 ];
 
 export default function MathLearning() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    const currentUser = requireAuth(router);
+    if (currentUser) {
+      setUser(currentUser);
+      setAuthLoading(false);
+    }
+  }, [router]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading math learning...</p>
+        </div>
+      </div>
+    );
+  }
+
   // Check for saved placement recommendation
   // const getRecommendedUnit = () => {
   //   if (typeof window !== 'undefined') {
