@@ -397,7 +397,9 @@ export default function PricingPage() {
                           const priceId = billingPeriod === 'monthly' 
                             ? plan.priceIds.monthly 
                             : plan.priceIds.annual;
-                          handleCheckout(priceId, plan.name);
+                          if (priceId) {
+                            handleCheckout(priceId, plan.name);
+                          }
                         }
                       }}
                       disabled={loading === plan.name}

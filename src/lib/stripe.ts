@@ -4,12 +4,16 @@ if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('STRIPE_SECRET_KEY is not set in environment variables');
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-06-20',
-  typescript: true,
-});
+// Initialize Stripe only if secret key is available
+export const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-08-27.basil',
+      typescript: true,
+    })
+  : null;
 
 export const getStripeCustomerByEmail = async (email: string) => {
+  if (!stripe) throw new Error('Stripe not configured');
   const customers = await stripe.customers.list({
     email,
     limit: 1,
@@ -19,6 +23,7 @@ export const getStripeCustomerByEmail = async (email: string) => {
 };
 
 export const createStripeCustomer = async (email: string, name?: string) => {
+  if (!stripe) throw new Error('Stripe not configured');
   return await stripe.customers.create({
     email,
     name,
@@ -26,6 +31,7 @@ export const createStripeCustomer = async (email: string, name?: string) => {
 };
 
 export const getSubscriptionsByCustomer = async (customerId: string) => {
+  if (!stripe) throw new Error('Stripe not configured');
   return await stripe.subscriptions.list({
     customer: customerId,
     status: 'active',

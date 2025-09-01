@@ -13,6 +13,14 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Check if Stripe is configured
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Payment processing not configured' },
+        { status: 503 }
+      );
+    }
+
     // Find or create Stripe customer
     let customer = await getStripeCustomerByEmail(user.email);
     
@@ -24,7 +32,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Create billing portal session
-    const portalSession = await stripe.billingPortal.sessions.create({
+    const portalSession = await stripe!.billingPortal.sessions.create({
       customer: customer.id,
       return_url: `${request.nextUrl.origin}/dashboard`,
     });

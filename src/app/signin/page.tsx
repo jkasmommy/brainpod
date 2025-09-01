@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, User, Mail, Lock, AlertCircle, CheckCircle } from 'lucide-react';
-import { getCurrentUser, initializeAuth, createDemoAccount } from '@/lib/auth';
+import { getCurrentUser, initializeAuth, createDemoAccount, type User as UserType } from '@/lib/auth';
 
 export default function SignIn() {
   const router = useRouter();
@@ -99,7 +99,7 @@ export default function SignIn() {
 
   const handleSignIn = async () => {
     const users = JSON.parse(localStorage.getItem('bp_users') || '[]');
-    const user = users.find((u: User) => u.email === formData.email);
+    const user = users.find((u: UserType) => u.email === formData.email);
 
     if (!user) {
       setError('No account found with this email address');
@@ -115,7 +115,7 @@ export default function SignIn() {
 
     // Update last login
     user.lastLogin = Date.now();
-    const updatedUsers = users.map((u: User) => u.id === user.id ? user : u);
+    const updatedUsers = users.map((u: UserType) => u.id === user.id ? user : u);
     localStorage.setItem('bp_users', JSON.stringify(updatedUsers));
 
     // Set current user session
@@ -131,14 +131,14 @@ export default function SignIn() {
     const users = JSON.parse(localStorage.getItem('bp_users') || '[]');
     
     // Check if email already exists
-    const existingUser = users.find((u: User) => u.email === formData.email);
+    const existingUser = users.find((u: UserType) => u.email === formData.email);
     if (existingUser) {
       setError('An account with this email already exists');
       return;
     }
 
     // Create new user
-    const newUser: User = {
+    const newUser: UserType = {
       id: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       email: formData.email,
       name: formData.name,

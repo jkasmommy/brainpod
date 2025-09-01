@@ -6,6 +6,14 @@ import Stripe from 'stripe';
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 export async function POST(request: NextRequest) {
+  // Check if Stripe is configured
+  if (!stripe || !webhookSecret) {
+    return NextResponse.json(
+      { error: 'Stripe webhook not configured' },
+      { status: 503 }
+    );
+  }
+
   const body = await request.text();
   const signature = request.headers.get('stripe-signature')!;
 
@@ -53,7 +61,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   console.log('Checkout completed:', session.id);
   
   if (session.mode === 'subscription' && session.subscription) {
-    const subscription = await stripe.subscriptions.retrieve(
+    const subscription = await stripe!.subscriptions.retrieve(
       session.subscription as string,
       { expand: ['items.data.price'] }
     );
