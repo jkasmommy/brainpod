@@ -186,10 +186,13 @@ export default function MathUnit({ params }: Props) {
                     {lesson.completed && (
                       <CheckCircle size={20} className="text-green-500" />
                     )}
-                    <button className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all">
+                    <Link
+                      href={`/learn/math/${unit}/${lesson.id}`}
+                      className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all"
+                    >
                       <Play size={16} className="mr-2" />
                       {lesson.completed ? 'Review' : 'Start'}
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
