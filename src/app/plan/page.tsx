@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import { SubjectKey, getLevel } from '@/lib/levels';
@@ -26,7 +26,7 @@ const subjects = [
   { id: 'social-studies' as SubjectKey, name: 'Social Studies', icon: '🌍', color: 'from-orange-500 to-red-600' }
 ];
 
-export default function PlanPage() {
+function PlanPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [user, setUser] = useState<any>(null);
@@ -419,5 +419,20 @@ export default function PlanPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PlanPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading your learning plan...</p>
+        </div>
+      </div>
+    }>
+      <PlanPageContent />
+    </Suspense>
   );
 }
