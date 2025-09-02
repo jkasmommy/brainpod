@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       // Fallback: create a default placement for testing
       const { label, grade, unit } = abilityToLabelAndStart(subject, 0);
       placement = {
-        subject: subject as any,
+        subject: subject,
         ability: 0,
         label,
         recommendedGrade: grade,
@@ -66,9 +66,22 @@ export async function POST(request: NextRequest) {
         [subject]: {
           'grade-k': {
             'counting-basics': {
+              title: 'Counting Basics',
               lessons: [
-                { id: 'counting-1-10', skills: ['counting', 'number-recognition'], title: 'Counting 1-10' },
-                { id: 'counting-patterns', skills: ['counting', 'patterns'], title: 'Counting Patterns' }
+                { 
+                  id: 'counting-1-10', 
+                  title: 'Counting 1-10',
+                  skills: ['counting', 'number-recognition'], 
+                  minutes: 15,
+                  difficulty: 1
+                },
+                { 
+                  id: 'counting-patterns', 
+                  title: 'Counting Patterns',
+                  skills: ['counting', 'patterns'], 
+                  minutes: 20,
+                  difficulty: 2
+                }
               ]
             }
           }

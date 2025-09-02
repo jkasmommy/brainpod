@@ -78,7 +78,7 @@ export default function BreathingCircle({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isActive, hasCompleted, onComplete]);
+  }, [isActive, hasCompleted, onComplete, breathingPattern]);
 
   const getPhaseText = () => {
     switch (phase) {

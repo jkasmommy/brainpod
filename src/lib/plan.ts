@@ -1,5 +1,14 @@
 import { Manifest, SkillGraph, Placement, PlanItem } from './types';
 
+type Lesson = {
+  id: string;
+  title: string;
+  skills: string[];
+  minutes: number;
+  difficulty: number;
+  standards?: string[];
+};
+
 /**
  * Generate a personalized learning plan from diagnostic placement
  * Uses data-driven rules to create adaptive learning pathways
@@ -99,13 +108,13 @@ export function generatePlan(
  * Find prerequisite lessons by walking the skill graph backwards
  */
 function findPrerequisiteLessons(
-  lessons: any[], 
+  lessons: Lesson[], 
   skills: SkillGraph, 
   manifest: Manifest, 
   subject: string, 
   count: number
-): any[] {
-  const prereqLessons: any[] = [];
+): Lesson[] {
+  const prereqLessons: Lesson[] = [];
   
   // Get all skills from current lessons
   const currentSkills = lessons.flatMap(lesson => lesson.skills);
@@ -141,7 +150,7 @@ function findPrerequisiteLessons(
 /**
  * Find the previous unit in the curriculum sequence
  */
-function findPreviousUnit(gradeData: any, currentUnit: string): any | null {
+function findPreviousUnit(gradeData: { [unit: string]: { title: string; lessons: Lesson[] } }, currentUnit: string): { title: string; lessons: Lesson[] } | null {
   const units = Object.keys(gradeData);
   const currentIndex = units.indexOf(currentUnit);
   
@@ -156,7 +165,7 @@ function findPreviousUnit(gradeData: any, currentUnit: string): any | null {
 /**
  * Find an enrichment lesson with higher difficulty
  */
-function findEnrichmentLesson(lessons: any[], ability: number): any | null {
+function findEnrichmentLesson(lessons: Lesson[], ability: number): Lesson | null {
   // Find lesson with difficulty above current ability level
   const enrichmentLessons = lessons.filter(lesson => lesson.difficulty > ability);
   

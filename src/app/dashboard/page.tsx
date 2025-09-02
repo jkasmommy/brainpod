@@ -6,6 +6,7 @@ import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
 import { SubjectKey, getAllLevels, LevelRecord } from '@/lib/levels';
 import { getMasterySummary } from '@/lib/mastery';
 import SubjectCard from '@/components/SubjectCard';
+import SupabaseTest from '@/components/SupabaseTest';
 import {
   GraduationCap,
   TrendingUp,
@@ -367,6 +368,11 @@ export default function Dashboard() {
                 </div>
               </a>
             </div>
+          </div>
+
+          {/* Supabase Connection Test - Debug Tool */}
+          <div className="mt-12">
+            <SupabaseTest />
           </div>
         </div>
       </div>

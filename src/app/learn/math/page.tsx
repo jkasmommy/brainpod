@@ -2,27 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getCurrentUser, requireAuth, getUserDisplayName } from '@/lib/auth';
+import { getCurrentUser, requireAuth } from '@/lib/auth';
+import { getManifest } from '@/lib/curriculum';
 import Link from 'next/link';
-import { Calculator, ArrowLeft, Star, Clock, Target } from 'lucide-react';
-
-const mathUnits = [
-  { id: 'counting', name: 'Counting & Number Recognition', level: 'K-1', description: 'Learn to count and recognize numbers 1-20' },
-  { id: 'addition', name: 'Addition Basics', level: '1-2', description: 'Adding numbers up to 20 with visual support' },
-  { id: 'subtraction', name: 'Subtraction Basics', level: '1-2', description: 'Subtracting numbers up to 20' },
-  { id: 'place-value', name: 'Place Value', level: '2-3', description: 'Understanding tens and ones places' },
-  { id: 'multiplication', name: 'Multiplication', level: '3-4', description: 'Times tables and repeated addition' },
-  { id: 'fractions', name: 'Fractions', level: '3-4', description: 'Parts of a whole and equivalent fractions' },
-  { id: 'decimals', name: 'Decimals', level: '4-5', description: 'Understanding decimal notation and operations' },
-  { id: 'problem-solving', name: 'Problem Solving', level: '3-5', description: 'Word problems and mathematical reasoning' },
-  { id: 'geometry', name: 'Geometry Basics', level: '2-4', description: 'Shapes, angles, and spatial reasoning' },
-  { id: 'advanced-operations', name: 'Advanced Operations', level: '4-5', description: 'Multi-digit operations and algorithms' }
-];
+import { Calculator, ArrowLeft, Star, Clock, Target, BookOpen } from 'lucide-react';
 
 export default function MathLearning() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [mathUnits, setMathUnits] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentUser = requireAuth(router);
@@ -32,7 +22,50 @@ export default function MathLearning() {
     }
   }, [router]);
 
-  if (authLoading) {
+  useEffect(() => {
+    const loadMathUnits = async () => {
+      try {
+        const manifest = await getManifest();
+        const units: any[] = [];
+
+        // Collect all math units across all grades
+        for (const [grade, gradeData] of Object.entries(manifest.math || {})) {
+          if (gradeData && typeof gradeData === 'object') {
+            for (const [unitId, unitData] of Object.entries(gradeData as Record<string, any>)) {
+              const unit = unitData as any;
+              units.push({
+                id: unitId,
+                grade,
+                title: unit.title,
+                description: unit.description,
+                level: grade === 'K' ? 'K' : grade === 'HS' ? '9-12' : `${grade}`,
+                lessonCount: unit.lessons?.length || 0,
+                totalMinutes: unit.lessons?.reduce((total: number, lesson: any) => total + (lesson.minutes || 10), 0) || 0
+              });
+            }
+          }
+        }
+
+        // Sort by grade level
+        units.sort((a, b) => {
+          const gradeOrder = ['K', '1', '2', '3', '4', '5', '6', '7', '8', 'HS'];
+          return gradeOrder.indexOf(a.grade) - gradeOrder.indexOf(b.grade);
+        });
+
+        setMathUnits(units);
+      } catch (error) {
+        console.error('Error loading math units:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (!authLoading) {
+      loadMathUnits();
+    }
+  }, [authLoading]);
+
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 flex items-center justify-center">
         <div className="text-center">
@@ -147,10 +180,10 @@ export default function MathLearning() {
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <span className="text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
-                          Unit {index + 1}
+                          Grade {unit.level}
                         </span>
                         <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                          Grade {unit.level}
+                          {unit.lessonCount} lessons
                         </span>
                         {isRecommended && (
                           <span className="text-xs text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded flex items-center">
@@ -161,17 +194,17 @@ export default function MathLearning() {
                       </div>
                       
                       <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
-                        {unit.name}
+                        {unit.title}
                       </h3>
                       
                       <p className="text-gray-600 dark:text-gray-400 mb-4">
-                        {unit.description}
+                        {unit.description || 'Explore mathematical concepts through interactive lessons and practice.'}
                       </p>
                       
                       <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center">
                           <Clock size={16} className="mr-1" />
-                          15-20 min
+                          {unit.totalMinutes} min total
                         </div>
                         <div className="flex items-center">
                           <Target size={16} className="mr-1" />

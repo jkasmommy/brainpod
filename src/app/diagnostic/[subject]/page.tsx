@@ -12,13 +12,12 @@ import {
 } from '../../../lib/diagTypes';
 import {
   loadDiagBank,
+  getDiagnosticConfig,
+  saveDiagnosticResults,
   nextItem,
   score,
-  updateAbility,
-  shouldStop,
-  place,
-  getBlueprintForSubject
-} from '../../../lib/diagnosticEngine';
+  updateAbility
+} from '../../../lib/enhancedDiagnosticEngine';
 import DiagProgress from '../../../components/DiagProgress';
 import QuestionCard from '../../../components/QuestionCard';
 import MindfulBreak from '../../../components/MindfulBreak';
@@ -27,6 +26,40 @@ export default function DiagnosticRunner() {
   const params = useParams();
   const router = useRouter();
   const subject = params.subject as Subject;
+
+  // Helper function to generate placement from ability
+  const generatePlacement = (ability: number, subject: Subject) => {
+    const gradeMap = {
+      math: {
+        '-2': 'K', '-1.5': 'K', '-1': '1', '-0.5': '1-2', 
+        '0': '2-3', '0.5': '3-4', '1': '4-5', '1.5': '6-7', '2': '8+'
+      },
+      reading: {
+        '-2': 'K', '-1.5': 'K', '-1': '1', '-0.5': '1-2',
+        '0': '2-3', '0.5': '3-4', '1': '4-5', '1.5': '6-7', '2': '8+'
+      },
+      science: {
+        '-2': 'K-1', '-1.5': '1-2', '-1': '2-3', '-0.5': '3-4',
+        '0': '4-5', '0.5': '5-6', '1': '6-7', '1.5': '7-8', '2': 'HS'
+      },
+      'social-studies': {
+        '-2': 'K-1', '-1.5': '1-2', '-1': '2-3', '-0.5': '3-4',
+        '0': '4-5', '0.5': '5-6', '1': '6-7', '1.5': '7-8', '2': 'HS'
+      }
+    };
+
+    const grades = gradeMap[subject] || gradeMap.math;
+    const abilityKey = Object.keys(grades).reduce((prev, curr) => 
+      Math.abs(parseFloat(curr) - ability) < Math.abs(parseFloat(prev) - ability) ? curr : prev
+    );
+
+    return {
+      ability,
+      sem: 0.3,
+      recommendedGrade: grades[abilityKey as keyof typeof grades] || '2-3',
+      recommendedUnit: undefined
+    };
+  };
 
   const [user, setUser] = useState<any>(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -40,6 +73,7 @@ export default function DiagnosticRunner() {
   const [lastCorrect, setLastCorrect] = useState<boolean>(false);
   const [attempts, setAttempts] = useState<DiagAttempt[]>([]);
   const [showMindfulBreak, setShowMindfulBreak] = useState(false);
+  const [hasTriggeredBreak, setHasTriggeredBreak] = useState(false);
   const [mood, setMood] = useState<number>(3);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -71,34 +105,39 @@ export default function DiagnosticRunner() {
         }
 
         // Load item bank and blueprint
-        const [bank, bp] = await Promise.all([
+        Promise.all([
           loadDiagBank(subject),
-          Promise.resolve(getBlueprintForSubject(subject))
-        ]);
+          getDiagnosticConfig(subject)
+        ]).then(([bankData, blueprintData]) => {
+          
+          if (bankData.length === 0) {
+            setError(`No diagnostic items found for ${subject}. Please try again later.`);
+            return;
+          }
 
-        if (bank.length === 0) {
-          setError(`No diagnostic items found for ${subject}. Please try again later.`);
-          return;
-        }
+          setItemBank(bankData);
+          setBlueprint(blueprintData);
 
-        setItemBank(bank);
-        setBlueprint(bp);
+          // Initialize state
+          const initialState: DiagState = {
+            subject,
+            ability: blueprintData?.startDifficulty || 0,
+            itemsAsked: [],
+            skillsSeen: new Set(),
+            correctCount: 0,
+            attempts: 0,
+            streak: 0,
+            mood: 3,
+            needsBreak: false
+          };
 
-        // Initialize state
-        const initialState: DiagState = {
-          subject,
-          ability: bp.startDifficulty,
-          itemsAsked: [],
-          skillsSeen: new Set(),
-          correctCount: 0,
-          attempts: 0,
-          streak: 0,
-          mood: 3,
-          needsBreak: false
-        };
-
-        setState(initialState);
-        setLoading(false);
+          setState(initialState);
+          setLoading(false);
+        }).catch(err => {
+          console.error('Failed to initialize diagnostic:', err);
+          setError('Failed to load diagnostic. Please refresh and try again.');
+          setLoading(false);
+        });
       } catch (err) {
         console.error('Failed to initialize diagnostic:', err);
         setError('Failed to load diagnostic. Please refresh and try again.');
@@ -125,14 +164,15 @@ export default function DiagnosticRunner() {
 
   // Check for mindful break triggers
   useEffect(() => {
-    if (!state || !blueprint || showMindfulBreak) return;
+    if (!state || !blueprint || showMindfulBreak || hasTriggeredBreak) return;
 
     // Only trigger break if we have made some progress and need one
     if ((state.attempts === blueprint.breakAfter || state.mood <= 2) && state.attempts > 0) {
       setState(prev => prev ? { ...prev, needsBreak: true } : null);
       setShowMindfulBreak(true);
+      setHasTriggeredBreak(true);
     }
-  }, [state?.attempts, state?.mood, blueprint?.breakAfter, showMindfulBreak]);
+  }, [state?.attempts, state?.mood, blueprint?.breakAfter]);
 
   const startDiagnostic = () => {
     if (state) {
@@ -178,7 +218,11 @@ export default function DiagnosticRunner() {
 
     // Check if should stop
     setTimeout(() => {
-      if (shouldStop(newState, blueprint)) {
+      // Check if we should stop
+      const shouldStopNow = (newState.attempts >= blueprint.maxItems) ||
+        (newState.attempts >= blueprint.minItems && Math.abs(newState.streak) >= blueprint.stopRules.streak);
+
+      if (shouldStopNow) {
         completeAssessment();
       } else {
         // Continue to next question
@@ -190,7 +234,27 @@ export default function DiagnosticRunner() {
   const completeAssessment = () => {
     if (!state) return;
 
-    const placement = place(state.ability, subject);
+    // Generate placement recommendation
+    const placement = generatePlacement(state.ability, subject);
+    
+    // Save results to database
+    if (user) {
+      saveDiagnosticResults(
+        user.id,
+        subject,
+        attempts.map((attempt: DiagAttempt) => ({
+          itemId: attempt.itemId,
+          response: attempt.response,
+          correct: attempt.correct,
+          timeMs: Date.now() - attempt.timestamp
+        })),
+        state.ability,
+        0.3, // Standard error estimate
+        placement
+      ).catch(error => {
+        console.error('Failed to save diagnostic results:', error);
+      });
+    }
     
     // Store placement in localStorage
     const placementKey = `bp_place_${subject}`;
